@@ -4,57 +4,49 @@ package comparator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        List<Person> people = new ArrayList<>();
-
+        Map<Integer, Person> people = new LinkedHashMap<>();
+        int index = 0;
         String input;
-        Person person = null;
+        Person person;
         while (!"END".equals(input = reader.readLine())) {
             String[] lines = input.split("\\s+");
             String name = lines[0];
             int age = Integer.parseInt(lines[1]);
             String town = lines[2];
             person = new Person(name, age, town);
-            people.add(person);
+            people.put(++index, person);
         }
         int number = Integer.parseInt(reader.readLine());
-        int chosenOne = number - 1;
 
-//        if (chosenOne == people.size()) {
-//            chosenOne--;
-//        }
-        Person personToCompare = people.get(chosenOne);
-        int sameness = 0;
-        int diversity = 0;
-        for (int i = 0; i < people.size(); i++) {
-            if (personToCompare == people.get(i)) {
-                sameness++;
-                continue;
+
+        Person p1 = people.get(number); //person to compare
+        Set<Person> sameness = new HashSet<>();
+        Set<Person> diversity = new HashSet<>();
+
+        for (Person value : people.values()) {
+            if(people.containsKey(number)){
+            if (new NameComparator().compare(p1,value) == 0 && new AgeComparator().compare(p1,value) == 0
+                    && new TownComparator().compare(p1,value) == 0) {
+                sameness.add(value);
             }
-            if (new NameComparator().compare(personToCompare, people.get(i)) != 0 ||
-                    new AgeComparator().compare(personToCompare, people.get(i)) != 0 || new TownComparator().compare(personToCompare, people.get(i)) != 0) {
-                diversity++;
-            } else if (new NameComparator().compare(personToCompare, people.get(i)) == 0 &&
-                    new AgeComparator().compare(personToCompare, people.get(i)) == 0 && new TownComparator().compare(personToCompare, people.get(i)) == 0) {
-                sameness++;
+            if (new NameComparator().compare(p1,value) != 0 || new AgeComparator().compare(p1,value) != 0
+                   || new TownComparator().compare(p1,value) != 0){
+                diversity.add(value);
             }
-
-
+            }else{
+                System.out.println("No matches");
+            }
         }
-        if (diversity == 1 && sameness == 0) {
+        if(sameness.size() - diversity.size() == 0){
             System.out.println("No matches");
-        } else if (sameness - diversity == 0) {
-            System.out.println("No matches");
-        } else {
-            System.out.print(sameness + " ");
-            System.out.print(diversity + " ");
-            System.out.print(people.size());
+        }else {
+            System.out.println(sameness.size() + " " + diversity.size() + " " + people.size());
         }
     }
 }
