@@ -16,6 +16,6 @@ public class Coffee {
 
     @Override
     public String toString() {
-        return "\"" + this.size.toString() + " " + this.type+"\"" + " " + "sold.";
+        return this.size.toString() + " " + this.type.toString() + " " + "sold.";
     }
 }
