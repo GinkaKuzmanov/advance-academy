@@ -14,7 +14,7 @@ public class AdFrame extends JFrame implements ActionListener {
     private JTextArea adDescriptionField;
     private JLabel showInfoLabel;
     private ArrayList<CarAdvertisement> carAdsList = new ArrayList<>();
-
+    private Dimension dimension = new Dimension(100, 20);
     public AdFrame() {
         //components for car
         super("Car advertisements");
@@ -23,31 +23,31 @@ public class AdFrame extends JFrame implements ActionListener {
         JLabel yearLbl = new JLabel("Year");
         add(yearLbl);
         carYearProducedField = new JTextField();
-        carYearProducedField.setPreferredSize(new Dimension(100, 20));
+        carYearProducedField.setPreferredSize(dimension);
         add(carYearProducedField);
 
         JLabel brandLabel = new JLabel("Brand");
         add(brandLabel);
         carBrandField = new JTextField();
-        carBrandField.setPreferredSize(new Dimension(100, 20));
+        carBrandField.setPreferredSize(dimension);
         add(carBrandField);
 
         JLabel modelLabel = new JLabel("Model");
         add(modelLabel);
         carModelField = new JTextField();
-        carModelField.setPreferredSize(new Dimension(100, 20));
+        carModelField.setPreferredSize(dimension);
         add(carModelField);
 
         JLabel titleLabel = new JLabel("Title");
         add(titleLabel);
         adTitleField = new JTextField();
-        adTitleField.setPreferredSize(new Dimension(100, 20));
+        adTitleField.setPreferredSize(dimension);
         add(adTitleField);
 
         JLabel descLabel = new JLabel("Description");
         add(descLabel);
         adDescriptionField = new JTextArea();
-        adDescriptionField.setPreferredSize(new Dimension(100, 50));
+        adDescriptionField.setPreferredSize(dimension);
         add(adDescriptionField);
 
         //components for info;
