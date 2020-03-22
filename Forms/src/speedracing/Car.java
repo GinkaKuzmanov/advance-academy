@@ -20,7 +20,7 @@ public class Car {
 
     public boolean canTravelDistance(int distance) {
         double costOfTravelFuel = this.fuelCostPerKm * distance;
-        return this.fuelAmount > costOfTravelFuel;
+        return this.fuelAmount >= costOfTravelFuel;
     }
 
     public void decreaseFuel(double reduceFuel) {
