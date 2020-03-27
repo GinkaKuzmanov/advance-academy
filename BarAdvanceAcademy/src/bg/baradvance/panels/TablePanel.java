@@ -19,6 +19,7 @@ public class TablePanel extends JPanel implements ActionListener {
     private JButton table45Btn;
     private JButton table50Btn;
 
+
     AdvanceAcademyBarFrame barFrame;
 
     public TablePanel(AdvanceAcademyBarFrame barFrame) {
@@ -61,6 +62,8 @@ public class TablePanel extends JPanel implements ActionListener {
         } else if (AdvanceAcademyBarFrame.operationState == 3) {
             barFrame.showBillPanel();
         }
+
+
     }
 
     @Override

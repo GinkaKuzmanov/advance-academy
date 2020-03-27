@@ -11,8 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-//TODO: Fix the functionality in jPanels when to appear and to hide;
-//TODO: Then how to create new Orders and differentiate between tables;
+
+//TODO:functionality in jPanels when to appear and to hide;
 
 public class AdvanceAcademyBarFrame extends JFrame {
 
@@ -25,7 +25,8 @@ public class AdvanceAcademyBarFrame extends JFrame {
     public Waiter currentWaiter;
     public String currentTableNumber;
     public List<Product> products = new ArrayList<>();
-    private CardLayout panelsCards;
+    //CardLayout?
+
 
     //static -> to be independent of instances
     public static int operationState;
@@ -59,11 +60,9 @@ public class AdvanceAcademyBarFrame extends JFrame {
 
     }
 
-    public void showTablePanel(int operationState) {
+    public void showTablePanel() {
         //need another method to show for which table after billing
         operationPanel.setVisible(false);
-        remove(operationPanel);
-        tablePanel.operationState = operationState;
         tablePanel = new TablePanel(this);
         add(tablePanel);
 
@@ -76,7 +75,6 @@ public class AdvanceAcademyBarFrame extends JFrame {
         remove(tablePanel);
         productPanel = new ProductPanel(this);
         add(productPanel);
-
         productPanel.setSize(getWidth(), getHeight());
         productPanel.setVisible(true);
     }

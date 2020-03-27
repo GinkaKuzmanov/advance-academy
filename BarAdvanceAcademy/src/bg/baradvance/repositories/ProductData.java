@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ProductRepo {
-
+public class ProductData {
+    //DATA FOR PRODUCTS
     List<Product> productList;
     Product product = new Product("Vodka", "50ml", 4.0);
     Product product1 = new Product("Wine", "100ml", 6.0);
@@ -16,7 +16,7 @@ public class ProductRepo {
     Product product4 = new Product("Rakia", "700ml", 30.0);
     Product product5 = new Product("Water", "500ml", 3.0);
 
-    public ProductRepo() {
+    public ProductData() {
         this.productList = new ArrayList<>();
         Collections.addAll(productList, product, product1, product2,
                 product3, product4, product5);

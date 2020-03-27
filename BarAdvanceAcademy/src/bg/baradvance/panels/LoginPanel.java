@@ -2,10 +2,9 @@ package bg.baradvance.panels;
 
 import bg.baradvance.AdvanceAcademyBarFrame;
 import bg.baradvance.models.Waiter;
-import bg.baradvance.repositories.WaiterRepositories;
+import bg.baradvance.repositories.WaiterData;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -16,8 +15,8 @@ public class LoginPanel extends JPanel {
     private JTextField pinCodeField;
     private JButton loginButton;
     private AdvanceAcademyBarFrame barFrame;
-    WaiterRepositories waiterRepositories = new WaiterRepositories();
-    List<Waiter> waiterList = waiterRepositories.getWaiters();
+    WaiterData waiterData = new WaiterData();
+    List<Waiter> waiterList = waiterData.getWaiters();
 
     public LoginPanel(AdvanceAcademyBarFrame barFrame) {
         this.barFrame = barFrame;

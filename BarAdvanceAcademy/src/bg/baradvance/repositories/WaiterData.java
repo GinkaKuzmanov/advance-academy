@@ -5,8 +5,8 @@ import bg.baradvance.models.Waiter;
 import java.util.*;
 
 
-public class WaiterRepositories {
-
+public class WaiterData {
+//DATA FOR WAITERS
 
     List<Waiter> waiters = new ArrayList<>();
 
@@ -14,7 +14,7 @@ public class WaiterRepositories {
     private Waiter waiter1 = new Waiter("Ivan", "6666");
     private Waiter waiter2 = new Waiter("Maria", "1111");
 
-    public WaiterRepositories() {
+    public WaiterData() {
         Collections.addAll(waiters, waiter, waiter1, waiter2);
     }
 
