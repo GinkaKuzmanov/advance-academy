@@ -6,27 +6,18 @@ import bg.baradvance.models.Order;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ExistingOrdersRepo implements Repository<Order,String> {
+public class ExistingOrdersRepo implements Repository<Order, String> {
 
-    Order order;
-    Map<String, Order> tableOrderMap;
 
-    public ExistingOrdersRepo(Order order) {
-        this.order = order;
-        this.tableOrderMap = new HashMap<>();
-    }
+    private Map<String, Order> tableOrderMap;
 
     public ExistingOrdersRepo() {
         this.tableOrderMap = new HashMap<>();
     }
 
-    public void set(String table){
-        this.tableOrderMap.put(table,null);
-    }
-
     @Override
-    public void add(Order unit) {
-        this.tableOrderMap.put(order.getTableNumber(),order);
+    public void save(Order unit) {
+        this.tableOrderMap.put(unit.getTableNumber(), unit);
     }
 
     @Override
@@ -36,7 +27,12 @@ public class ExistingOrdersRepo implements Repository<Order,String> {
     }
 
     @Override
-    public Order get(String tableNumber) {
+    public Order fetch(String tableNumber) {
         return this.tableOrderMap.get(tableNumber);
+    }
+
+    @Override
+    public boolean contains(String tableNumber) {
+        return this.tableOrderMap.containsKey(tableNumber);
     }
 }

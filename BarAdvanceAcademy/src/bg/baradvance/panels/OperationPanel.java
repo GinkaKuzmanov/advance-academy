@@ -18,21 +18,24 @@ public class OperationPanel extends JPanel {
         newOrderButton = new JButton("Add new order");
         add(newOrderButton);
         newOrderButton.addActionListener((e -> {
-            barFrame.showTablePanel();
             AdvanceAcademyBarFrame.operationState = 1;
+            barFrame.showTablePanel();
+
         }));
         existingOrderButton = new JButton("Add to existing order");
         add(existingOrderButton);
         existingOrderButton.addActionListener(e -> {
-            barFrame.showTablePanel();
             AdvanceAcademyBarFrame.operationState = 2;
+            barFrame.showTablePanel();
+
         });
 
         getBillButton = new JButton("Print bill");
         add(getBillButton);
         getBillButton.addActionListener(e -> {
-            barFrame.showTablePanel();
             AdvanceAcademyBarFrame.operationState = 3;
+            barFrame.showTablePanel();
+
         });
 
     }

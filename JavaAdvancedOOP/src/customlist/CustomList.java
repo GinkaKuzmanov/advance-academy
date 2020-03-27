@@ -2,9 +2,11 @@ package customlist;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
-public class CustomList<T extends Comparable<T>> implements CustomListable<T> {
+public class CustomList<T extends Comparable<T>>
+        implements CustomListable<T>,Iterable<T> {
 
     private List<T> items;
 
@@ -40,8 +42,8 @@ public class CustomList<T extends Comparable<T>> implements CustomListable<T> {
     @Override
     public int countGreaterThan(T element) {
         int count = 0;
-        for (T el: this.items){
-            if(el.compareTo(element) > 0){
+        for (T el : this.items) {
+            if (el.compareTo(element) > 0) {
                 count++;
             }
         }
@@ -63,5 +65,15 @@ public class CustomList<T extends Comparable<T>> implements CustomListable<T> {
         for (T item : this.items) {
             System.out.println(item);
         }
+    }
+
+    @Override
+    public void sort() {
+        Collections.sort(this.items);
+        }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ListIterator<T>(items);
     }
 }

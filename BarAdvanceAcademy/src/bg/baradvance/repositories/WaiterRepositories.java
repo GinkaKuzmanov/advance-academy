@@ -18,12 +18,7 @@ public class WaiterRepositories {
         Collections.addAll(waiters, waiter, waiter1, waiter2);
     }
 
-    public void addWaiter(Waiter waiterLoad) {
-        this.waiters.add(waiterLoad);
-    }
-
-
-    public  List<Waiter> getWaiters() {
+    public List<Waiter> getWaiters() {
         return this.waiters;
     }
 }

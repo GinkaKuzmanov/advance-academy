@@ -1,6 +1,8 @@
+import annotations.Subject;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Subject(categories = {"gina", "value"})
 public class Logger {
     private List<Message> messages;
     private Importance importanceLevel;

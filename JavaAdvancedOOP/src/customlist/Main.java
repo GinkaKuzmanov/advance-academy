@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        CustomListable<String> list = new CustomList<>();
+        CustomList<String> list = new CustomList<>();
         CommandInterpreter commandInterpreter = new CommandInterpreter(list);
 
         while(!commandInterpreter.isEndDispatch()){

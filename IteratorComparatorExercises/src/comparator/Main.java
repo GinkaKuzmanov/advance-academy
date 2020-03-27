@@ -30,23 +30,24 @@ public class Main {
         Set<Person> diversity = new HashSet<>();
 
         for (Person value : people.values()) {
-            if(people.containsKey(number)){
-            if (new NameComparator().compare(p1,value) == 0 && new AgeComparator().compare(p1,value) == 0
-                    && new TownComparator().compare(p1,value) == 0) {
-                sameness.add(value);
-            }
-            if (new NameComparator().compare(p1,value) != 0 || new AgeComparator().compare(p1,value) != 0
-                   || new TownComparator().compare(p1,value) != 0){
-                diversity.add(value);
-            }
-            }else{
+            if (people.containsKey(number)) {
+                if (new NameComparator().compare(p1, value) == 0 && new AgeComparator().compare(p1, value) == 0
+                        && new TownComparator().compare(p1, value) == 0) {
+                    sameness.add(value);
+                }
+                if (new NameComparator().compare(p1, value) != 0 || new AgeComparator().compare(p1, value) != 0
+                        || new TownComparator().compare(p1, value) != 0) {
+                    diversity.add(value);
+                }
+            } else {
                 System.out.println("No matches");
             }
         }
-        if(sameness.size() - diversity.size() == 0){
+        if (sameness.size() - diversity.size() == 0) {
             System.out.println("No matches");
-        }else {
+        } else {
             System.out.println(sameness.size() + " " + diversity.size() + " " + people.size());
         }
     }
 }
+

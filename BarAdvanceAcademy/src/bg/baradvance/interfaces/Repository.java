@@ -1,12 +1,18 @@
 package bg.baradvance.interfaces;
 
 public interface Repository<T,K> {
-
-    void add(T unit);
+    /**
+     * Saves the data in structure.
+     * @param unit
+     * Training OOP principles.(for testing)
+     */
+    void save(T unit);
 
     T remove(K id);
 
-    T get(K id);
+    T fetch(K id);
+
+    boolean contains(K tableNumber);
 
 
 }

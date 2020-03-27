@@ -2,10 +2,10 @@ package customlist;
 
 public class CommandInterpreter{
 
-    private CustomListable<String> customList;
+    private CustomList<String> customList;
     private boolean endDispatch = false;
 
-    public CommandInterpreter(CustomListable<String> customList) {
+    public CommandInterpreter(CustomList<String> customList) {
         this.customList = customList;
     }
 
@@ -41,6 +41,14 @@ public class CommandInterpreter{
                 break;
             case"Print":
                 this.customList.print();
+                break;
+            case "Sort":
+                this.customList.sort();
+                break;
+            case "Iter":
+                for(String item: this.customList){
+                    System.out.println(item);
+                }
                 break;
             case "END":
                 this.endDispatch = true;

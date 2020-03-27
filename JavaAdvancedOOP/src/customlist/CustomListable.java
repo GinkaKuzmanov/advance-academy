@@ -1,6 +1,6 @@
 package customlist;
 
-public interface CustomListable<T extends Comparable<T>> extends Printable<T> {
+public interface CustomListable<T extends Comparable<T>> extends Sortable<T>,Printable<T>  {
 
     void add(T element);
 
@@ -15,5 +15,6 @@ public interface CustomListable<T extends Comparable<T>> extends Printable<T> {
     T getMax();
 
     T getMin();
+
 
 }

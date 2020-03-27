@@ -18,10 +18,9 @@ public class ProductRepo {
 
     public ProductRepo() {
         this.productList = new ArrayList<>();
-        Collections.addAll(productList,product,product1,product2,
-                product3,product4,product5);
+        Collections.addAll(productList, product, product1, product2,
+                product3, product4, product5);
     }
-
 
 
     public List<Product> getProductList() {

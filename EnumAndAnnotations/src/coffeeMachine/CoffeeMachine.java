@@ -1,5 +1,7 @@
 package coffeeMachine;
 
+import annotations.Author;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class CoffeeMachine {
         this.coffeeList = new ArrayList<>();
     }
 
+    @Author(name = "Ginka")
     public void buyCoffee(String size, String type) {
         CoffeeSize coffeeSize = Enum.valueOf(CoffeeSize.class,size.toUpperCase());
         CoffeeType coffeeType = Enum.valueOf(CoffeeType.class,type.toUpperCase());
