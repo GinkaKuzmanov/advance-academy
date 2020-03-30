@@ -12,20 +12,17 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO:functionality in jPanels when to appear and to hide;
-
 public class AdvanceAcademyBarFrame extends JFrame {
 
     public Repository<Order, String> repo = new ExistingOrdersRepo();
-    private LoginPanel loginPanel;
-    private OperationPanel operationPanel;
-    private TablePanel tablePanel;
-    private ProductPanel productPanel;
-    private BillPanel billPanel;
+    public LoginPanel loginPanel;
+    public OperationPanel operationPanel;
+    public TablePanel tablePanel;
+    public  ProductPanel productPanel;
+    public BillPanel billPanel;
     public Waiter currentWaiter;
     public String currentTableNumber;
     public List<Product> products = new ArrayList<>();
-    //CardLayout?
 
 
     //static -> to be independent of instances
@@ -37,71 +34,66 @@ public class AdvanceAcademyBarFrame extends JFrame {
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
-
         showLoginPanel();
 
     }
 
     public void showLoginPanel() {
+        //Panel for login
         loginPanel = new LoginPanel(this);
         loginPanel.setSize(getWidth(), getHeight());
         add(loginPanel);
     }
 
-    public void showOperationPanel() {
+    public void hideLoginPanel(){
         loginPanel.setVisible(false);
         remove(loginPanel);
+    }
 
+
+    public void showOperationPanel() {
+        //Panel with options menu
         operationPanel = new OperationPanel(this);
-        add(operationPanel);
-
         operationPanel.setSize(getWidth(), getHeight());
-        operationPanel.setVisible(true);
-
+        add(operationPanel);
+    }
+    public void hideOperationPanel(){
+        operationPanel.setVisible(false);
+        remove(operationPanel);
     }
 
     public void showTablePanel() {
-        //need another method to show for which table after billing
-        operationPanel.setVisible(false);
         tablePanel = new TablePanel(this);
-        add(tablePanel);
-
         tablePanel.setSize(getWidth(), getHeight());
-        tablePanel.setVisible(true);
+        add(tablePanel);
+    }
+
+    public void hideTablePanel(){
+        tablePanel.setVisible(false);
+        remove(tablePanel);
     }
 
     public void showProductPanel() {
-        tablePanel.setVisible(false);
-        remove(tablePanel);
+        //Panel with products/items
         productPanel = new ProductPanel(this);
-        add(productPanel);
         productPanel.setSize(getWidth(), getHeight());
-        productPanel.setVisible(true);
+        add(productPanel);
+    }
+    public void hideProductPanel(){
+        productPanel.setVisible(false);
+        remove(productPanel);
     }
 
     public void showBillPanel() {
-        try {
-            remove(productPanel);
-            tablePanel.setVisible(false);
             billPanel = new BillPanel(this);
-            add(billPanel);
             billPanel.setSize(getWidth(), getHeight());
-            billPanel.setVisible(true);
-        } catch (NullPointerException npe) {
-            JOptionPane.showMessageDialog(null,
-                    "Add an order first!", "Error", JOptionPane.ERROR_MESSAGE);
-            operationPanel.setVisible(true);
-        }
+            add(billPanel);
+    }
+    public void hideBillPanel() {
+        billPanel.setVisible(false);
+        remove(billPanel);
     }
 
-    public void returnToOperation() {
-        productPanel.setVisible(false);
-        remove(productPanel);
-        tablePanel.setVisible(false);
-        operationPanel.setSize(getWidth(), getHeight());
-        operationPanel.setVisible(true);
-
-    }
 
 
 }

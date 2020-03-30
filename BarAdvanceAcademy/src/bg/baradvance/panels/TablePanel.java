@@ -3,7 +3,7 @@ package bg.baradvance.panels;
 import bg.baradvance.AdvanceAcademyBarFrame;
 
 import javax.swing.*;
-import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +23,6 @@ public class TablePanel extends JPanel implements ActionListener {
     AdvanceAcademyBarFrame barFrame;
 
     public TablePanel(AdvanceAcademyBarFrame barFrame) {
-        super(new FlowLayout());
         this.barFrame = barFrame;
         this.table10Btn = new JButton("10");
         add(table10Btn);
@@ -58,11 +57,14 @@ public class TablePanel extends JPanel implements ActionListener {
     private void chosenOperation(AdvanceAcademyBarFrame barFrame) {
         if (AdvanceAcademyBarFrame.operationState == 1
                 || AdvanceAcademyBarFrame.operationState == 2) {
+            barFrame.hideTablePanel();
             barFrame.showProductPanel();
         } else if (AdvanceAcademyBarFrame.operationState == 3) {
-            barFrame.showBillPanel();
-        }
+            //validator code
+                barFrame.hideTablePanel();
+                barFrame.showBillPanel();
 
+        }
 
     }
 

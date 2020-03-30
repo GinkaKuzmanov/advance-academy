@@ -4,7 +4,6 @@ import bg.baradvance.AdvanceAcademyBarFrame;
 import bg.baradvance.models.Order;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class BillPanel extends JPanel {
     JLabel billLabel;
@@ -12,16 +11,27 @@ public class BillPanel extends JPanel {
     Order order;
 
     public BillPanel(AdvanceAcademyBarFrame barFrame) {
-        super(new FlowLayout());
         this.barFrame = barFrame;
         try {
             order = barFrame.repo.fetch(barFrame.currentTableNumber);
             this.billLabel = new JLabel(order.billMessage());
             add(billLabel);
+            returnToOperation(barFrame);
         }catch(NullPointerException npe){
             System.out.println(npe.getMessage());
             JLabel lbl = new JLabel("NO CURRENT ORDER!");
             add(lbl);
+            returnToOperation(barFrame);
         }
+    }
+
+    private void returnToOperation(AdvanceAcademyBarFrame barFrame) {
+        JButton jBtnReturn = new JButton("Return");
+
+        jBtnReturn.addActionListener(e -> {
+            barFrame.hideBillPanel();
+            barFrame.showOperationPanel();
+        });
+        add(jBtnReturn);
     }
 }

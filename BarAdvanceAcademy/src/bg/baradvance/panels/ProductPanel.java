@@ -6,7 +6,6 @@ import bg.baradvance.models.Product;
 import bg.baradvance.repositories.ProductData;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.List;
 
 public class ProductPanel extends JPanel {
@@ -14,28 +13,37 @@ public class ProductPanel extends JPanel {
     AdvanceAcademyBarFrame barFrame;
     ProductData productData = new ProductData();
     List<Product> productList = productData.getProductList();
-    Order order;
+    Order order = new Order();
     JButton eraseOrder;
     JButton applyButton;
-    JButton pBtn;
+    JButton jButtonProducts;
     //to save the state of buttons
-    JButton[] buttonsArray = new JButton[productList.size()];
 
 
     public ProductPanel(AdvanceAcademyBarFrame barFrame) {
-        super(new FlowLayout());
         this.barFrame = barFrame;
         //GENERATING PRODUCT BUTTONS BASED ON PRODUCTS COUNT
-        for (int i = 0; i < productList.size(); i++) {
-            Product product = productList.get(i);
-            pBtn = new JButton
+        for (Product product : productList) {
+            jButtonProducts = new JButton
                     (product.getName() + " " + product.getQuantity());
-            pBtn.addActionListener(e -> this.barFrame.products.add(product));
-            buttonsArray[i] = pBtn;
-            barFrame.add(buttonsArray[i]);
+            jButtonProducts.addActionListener(
+                    e -> {
+                        this.barFrame.products.add(product);
+                        order.setChosenProducts(this.barFrame.products);
+                        if (AdvanceAcademyBarFrame.operationState == 2) {
+                            order.addToExistingOrder(product);
+                        }
+                    });
+            add(jButtonProducts);
+
         }
+
+
         eraseOrder = new JButton("Erase Order");
         add(eraseOrder);
+
+        applyButton = new JButton("Apply");
+
         eraseOrder.addActionListener(e -> {
             int res = JOptionPane.showConfirmDialog(null,
                     "Are you sure you want to delete the order?", "Deletion",
@@ -48,10 +56,13 @@ public class ProductPanel extends JPanel {
                         "Order deleted",
                         "Deletion"
                         , JOptionPane.INFORMATION_MESSAGE);
+                barFrame.hideProductPanel();
+                barFrame.showOperationPanel();
 
             }
         });
-        applyButton = new JButton("Apply");
+        //Finishes the order and returns to login
+
         add(applyButton);
         applyButton.addActionListener(e -> {
             int result = JOptionPane.showConfirmDialog(null
@@ -59,12 +70,13 @@ public class ProductPanel extends JPanel {
                     , "Confirm"
                     , JOptionPane.OK_CANCEL_OPTION);
             if (result == JOptionPane.OK_OPTION) {
-                order = new Order(barFrame.currentTableNumber
-                        , barFrame.currentWaiter,
-                        this.barFrame.products);
+                order.setTableNumber(this.barFrame.currentTableNumber);
+                order.setWaiter(this.barFrame.currentWaiter);
+
                 barFrame.repo.save(order);
-                //TODO: panels do not exit; methods in an infinite loop
-                barFrame.returnToOperation();
+                //removing the product panel
+               barFrame.hideProductPanel();
+               barFrame.showLoginPanel();
             }
         });
 

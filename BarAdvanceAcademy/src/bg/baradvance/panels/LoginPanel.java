@@ -47,12 +47,15 @@ public class LoginPanel extends JPanel {
             }
         });
         loginButton = new JButton("Log in");
+
         add(loginButton);
+
         loginButton.addActionListener(e -> {
             boolean isValid = false;
             for (Waiter waiter : this.waiterList) {
                 if (validPin(waiter)) {
                     barFrame.currentWaiter = waiter;
+                    barFrame.hideLoginPanel();
                     barFrame.showOperationPanel();
                     isValid = true;
                 }
