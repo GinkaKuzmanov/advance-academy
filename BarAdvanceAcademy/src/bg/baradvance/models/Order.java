@@ -25,12 +25,6 @@ public class Order {
         this.chosenProducts = products;
     }
 
-    public Order(String tableNumber, Waiter waiter, List<Product> chosenProducts) {
-        this.tableNumber = tableNumber;
-        this.chosenProducts = chosenProducts;
-        this.waiter = waiter;
-
-    }
 
     public void addToExistingOrder(Product... products){
         Collections.addAll(this.chosenProducts,products);

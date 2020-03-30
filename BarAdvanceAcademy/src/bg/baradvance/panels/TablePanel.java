@@ -55,22 +55,34 @@ public class TablePanel extends JPanel implements ActionListener {
     }
 
     private void chosenOperation(AdvanceAcademyBarFrame barFrame) {
-        if (AdvanceAcademyBarFrame.operationState == 1
-                || AdvanceAcademyBarFrame.operationState == 2) {
+        if (AdvanceAcademyBarFrame.operationState == 1) {
             barFrame.hideTablePanel();
             barFrame.showProductPanel();
-        } else if (AdvanceAcademyBarFrame.operationState == 3) {
-            //validator code
+        }
+        else if (AdvanceAcademyBarFrame.operationState == 2) {
+            if (!barFrame.repo.contains(barFrame.currentTableNumber)) {
+                int choice = JOptionPane.showConfirmDialog(null,
+                        "There is no order on this table.Would you like to create one?", "Create Order",
+                        JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    barFrame.hideTablePanel();
+                    barFrame.showProductPanel();
+                } else {
+                    barFrame.hideTablePanel();
+                    barFrame.showOperationPanel();
+                }
+
+            }
+        }
+            if (AdvanceAcademyBarFrame.operationState == 3) {
                 barFrame.hideTablePanel();
                 barFrame.showBillPanel();
-
+            }
         }
 
+        @Override
+        public void actionPerformed (ActionEvent e){
+            barFrame.currentTableNumber = ((JButton) e.getSource()).getText();
+            chosenOperation(barFrame);
+        }
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        barFrame.currentTableNumber = ((JButton) e.getSource()).getText();
-        chosenOperation(barFrame);
-    }
-}

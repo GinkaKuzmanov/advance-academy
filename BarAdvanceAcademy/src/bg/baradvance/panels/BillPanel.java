@@ -13,7 +13,7 @@ public class BillPanel extends JPanel {
     public BillPanel(AdvanceAcademyBarFrame barFrame) {
         this.barFrame = barFrame;
         try {
-            order = barFrame.repo.fetch(barFrame.currentTableNumber);
+            order = barFrame.repo.remove(barFrame.currentTableNumber);
             this.billLabel = new JLabel(order.billMessage());
             add(billLabel);
             returnToOperation(barFrame);

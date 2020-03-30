@@ -21,10 +21,6 @@ public class OperationPanel extends JPanel {
         add(newOrderButton);
         newOrderButton.addActionListener((e -> {
             AdvanceAcademyBarFrame.operationState = 1;
-            if (barFrame.repo.contains(barFrame.currentTableNumber)) {
-                JOptionPane.showMessageDialog(null, "There is order on this table!", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
             barFrame.hideOperationPanel();
             barFrame.showTablePanel();
 
@@ -35,10 +31,10 @@ public class OperationPanel extends JPanel {
         add(existingOrderButton);
         existingOrderButton.addActionListener(e -> {
             AdvanceAcademyBarFrame.operationState = 2;
-            barFrame.hideOperationPanel();
-            barFrame.showTablePanel();
-
+                    barFrame.hideOperationPanel();
+                    barFrame.showTablePanel();
         });
+
 
         //3 Print bill
         getBillButton = new JButton("Print bill");

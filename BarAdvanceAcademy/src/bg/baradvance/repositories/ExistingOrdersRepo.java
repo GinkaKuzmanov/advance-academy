@@ -21,7 +21,6 @@ public class ExistingOrdersRepo implements Repository<Order, String> {
     }
 
     @Override
-    //will use the return Order-> to print the bill;
     public Order remove(String tableNumber) {
         return this.tableOrderMap.remove(tableNumber);
     }

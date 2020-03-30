@@ -17,8 +17,6 @@ public class ProductPanel extends JPanel {
     JButton eraseOrder;
     JButton applyButton;
     JButton jButtonProducts;
-    //to save the state of buttons
-
 
     public ProductPanel(AdvanceAcademyBarFrame barFrame) {
         this.barFrame = barFrame;
