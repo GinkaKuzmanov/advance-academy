@@ -16,9 +16,9 @@ public class BillPanel extends JPanel {
             order = barFrame.repo.remove(barFrame.currentTableNumber);
             this.billLabel = new JLabel(order.billMessage());
             add(billLabel);
+            order.getChosenProducts().clear();
             returnToOperation(barFrame);
         }catch(NullPointerException npe){
-            System.out.println(npe.getMessage());
             JLabel lbl = new JLabel("NO CURRENT ORDER!");
             add(lbl);
             returnToOperation(barFrame);

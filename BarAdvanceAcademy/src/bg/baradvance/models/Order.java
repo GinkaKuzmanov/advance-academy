@@ -34,6 +34,9 @@ public class Order {
         return tableNumber;
     }
 
+    public List<Product> getChosenProducts() {
+        return this.chosenProducts;
+    }
 
     private double getTotalBill() {
 
@@ -42,9 +45,10 @@ public class Order {
     }
 
     public String billMessage() {
-        return String.format("You were served by: %s. Table: #%s. Owed sum is %.2f BGN."
-                , this.waiter.getName(),
-                this.getTableNumber()
+        return String.format("You were served by: %s. Table: #%s.Order: %s. Owed sum is %.2f BGN."
+                , this.waiter.getName()
+                , this.getTableNumber()
+                ,this.getChosenProducts()
                 , this.getTotalBill());
     }
 

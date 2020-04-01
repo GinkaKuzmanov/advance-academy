@@ -1,7 +1,6 @@
 package bg.baradvance.panels;
 
 import bg.baradvance.AdvanceAcademyBarFrame;
-import bg.baradvance.models.Order;
 import bg.baradvance.models.Product;
 import bg.baradvance.repositories.ProductData;
 
@@ -13,7 +12,6 @@ public class ProductPanel extends JPanel {
     AdvanceAcademyBarFrame barFrame;
     ProductData productData = new ProductData();
     List<Product> productList = productData.getProductList();
-    Order order = new Order();
     JButton eraseOrder;
     JButton applyButton;
     JButton jButtonProducts;
@@ -27,13 +25,12 @@ public class ProductPanel extends JPanel {
             jButtonProducts.addActionListener(
                     e -> {
                         this.barFrame.products.add(product);
-                        order.setChosenProducts(this.barFrame.products);
+                        barFrame.order.setChosenProducts(this.barFrame.products);
                         if (AdvanceAcademyBarFrame.operationState == 2) {
-                            order.addToExistingOrder(product);
+                            barFrame.order.addToExistingOrder(product);
                         }
                     });
             add(jButtonProducts);
-
         }
 
 
@@ -46,35 +43,50 @@ public class ProductPanel extends JPanel {
             int res = JOptionPane.showConfirmDialog(null,
                     "Are you sure you want to delete the order?", "Deletion",
                     JOptionPane.YES_NO_OPTION);
-            if (res == JOptionPane.YES_OPTION) {
+            if (res == JOptionPane.YES_OPTION && barFrame.order.getChosenProducts() != null) {
                 barFrame.repo.remove(barFrame.currentTableNumber);
                 //REMOVE THE INSTANCE
-                order = null;
                 JOptionPane.showMessageDialog(null,
                         "Order deleted",
                         "Deletion"
                         , JOptionPane.INFORMATION_MESSAGE);
                 barFrame.hideProductPanel();
                 barFrame.showOperationPanel();
+            }
 
+            if (res == JOptionPane.YES_OPTION && barFrame.order.getChosenProducts() == null) {
+                JOptionPane.showMessageDialog(null
+                        , "No order to be deleted!", "Notification"
+                        , JOptionPane.INFORMATION_MESSAGE);
+                barFrame.hideProductPanel();
+                barFrame.showOperationPanel();
             }
         });
         //Finishes the order and returns to login
 
         add(applyButton);
         applyButton.addActionListener(e -> {
+
+            System.out.println();
+
             int result = JOptionPane.showConfirmDialog(null
-                    , "Do you want to apply this order"
+                    , "Do you want to apply the order?"
                     , "Confirm"
                     , JOptionPane.OK_CANCEL_OPTION);
             if (result == JOptionPane.OK_OPTION) {
-                order.setTableNumber(this.barFrame.currentTableNumber);
-                order.setWaiter(this.barFrame.currentWaiter);
-
-                barFrame.repo.save(order);
+                if (!this.barFrame.products.isEmpty()) {
+                    barFrame.repo.save(barFrame.order);
+                } else {
+                    JOptionPane.showMessageDialog(null
+                            , "Please,choose at least one product first"
+                            , "Notification", JOptionPane.INFORMATION_MESSAGE);
+                }
                 //removing the product panel
-               barFrame.hideProductPanel();
-               barFrame.showLoginPanel();
+                barFrame.hideProductPanel();
+                barFrame.showLoginPanel();
+            } else {
+                barFrame.hideProductPanel();
+                barFrame.showOperationPanel();
             }
         });
 

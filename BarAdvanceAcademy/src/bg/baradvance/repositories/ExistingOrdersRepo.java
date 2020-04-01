@@ -4,9 +4,10 @@ import bg.baradvance.interfaces.Repository;
 import bg.baradvance.models.Order;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
-public class ExistingOrdersRepo implements Repository<Order, String> {
+public class ExistingOrdersRepo implements Repository<String, Order>,Iterable<Order> {
 
 
     private Map<String, Order> tableOrderMap;
@@ -34,4 +35,10 @@ public class ExistingOrdersRepo implements Repository<Order, String> {
     public boolean contains(String tableNumber) {
         return this.tableOrderMap.containsKey(tableNumber);
     }
+
+    @Override
+    public Iterator<Order> iterator() {
+        return tableOrderMap.values().iterator();
+    }
+
 }

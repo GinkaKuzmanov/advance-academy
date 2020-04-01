@@ -1,6 +1,7 @@
 package bg.baradvance.panels;
 
 import bg.baradvance.AdvanceAcademyBarFrame;
+import bg.baradvance.models.Order;
 
 import javax.swing.*;
 
@@ -54,35 +55,98 @@ public class TablePanel extends JPanel implements ActionListener {
         table50Btn.addActionListener(this);
     }
 
-    private void chosenOperation(AdvanceAcademyBarFrame barFrame) {
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        barFrame.currentTableNumber = ((JButton) e.getSource()).getText();
+
+        String pressedButton = ((JButton) e.getSource()).getText();
+
+        boolean isProductFound = false;
+        for (Order order : barFrame.repo) {
+
+            if (order.getTableNumber().equals(pressedButton)) {
+                productFound();
+                isProductFound = true;
+                System.out.println("is  found");
+            }
+
+        }
+        if (!isProductFound) {
+            productNotFound(pressedButton);
+            System.out.println("is not found");
+        }
+
+    }
+
+    private void productFound() {
+
         if (AdvanceAcademyBarFrame.operationState == 1) {
+            //OPTION 1  FOUND
+            //TODO ADD POPUP ORDER ALREDY EXISTS
+            JOptionPane.showMessageDialog(null
+                    , "There is already an order for this table",
+                    "Warning", JOptionPane.ERROR_MESSAGE);
+
+        } else if (AdvanceAcademyBarFrame.operationState == 2) {
+            //OPTION 2  FOUND
+            //todo show items panel
+            barFrame.order.setTableNumber(this.barFrame.currentTableNumber);
+            barFrame.order.setWaiter(this.barFrame.currentWaiter);
             barFrame.hideTablePanel();
             barFrame.showProductPanel();
         }
-        else if (AdvanceAcademyBarFrame.operationState == 2) {
+        if (AdvanceAcademyBarFrame.operationState == 3) {
+            //OPTION 3  FOUND
+            barFrame.hideTablePanel();
+            barFrame.showBillPanel();
+        }
+    }
+
+    private void productNotFound(String table) {
+
+        if (AdvanceAcademyBarFrame.operationState == 1) {
+            //OPTION 1 NOT FOUND
+            // TODO: initialize the order object and put it into map
+            //todo add table number and waiter to repo
+            //sazdavash order i dobavq6 weiter i table id
+            barFrame.order.setTableNumber(this.barFrame.currentTableNumber);
+            barFrame.order.setWaiter(this.barFrame.currentWaiter);
+            barFrame.hideTablePanel();
+            barFrame.showProductPanel();
+        } else if (AdvanceAcademyBarFrame.operationState == 2) {
+            //OPTION 2 NOT FOUND
+            //TODO: existing option order not =found show message no order yet
+
             if (!barFrame.repo.contains(barFrame.currentTableNumber)) {
                 int choice = JOptionPane.showConfirmDialog(null,
                         "There is no order on this table.Would you like to create one?", "Create Order",
                         JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
+                    //add order
+                    //todo add table number and waiter to repo
+                    barFrame.order.setTableNumber(this.barFrame.currentTableNumber);
+                    barFrame.order.setWaiter(this.barFrame.currentWaiter);
                     barFrame.hideTablePanel();
                     barFrame.showProductPanel();
-                } else {
+                } else if (choice == JOptionPane.NO_OPTION) {
+                    //do not add order !!!
                     barFrame.hideTablePanel();
                     barFrame.showOperationPanel();
                 }
-
             }
-        }
-            if (AdvanceAcademyBarFrame.operationState == 3) {
-                barFrame.hideTablePanel();
-                barFrame.showBillPanel();
-            }
-        }
+//            else{
+//                barFrame.hideTablePanel();
+//                barFrame.showProductPanel();
+//            }
 
-        @Override
-        public void actionPerformed (ActionEvent e){
-            barFrame.currentTableNumber = ((JButton) e.getSource()).getText();
-            chosenOperation(barFrame);
+        }
+        if (AdvanceAcademyBarFrame.operationState == 3) {
+            //OPTION 3 NOT FOUND
+            JOptionPane.showMessageDialog(null
+                    , "No existing order fiound",
+                    "No order found", JOptionPane.ERROR_MESSAGE);
+
         }
     }
+}

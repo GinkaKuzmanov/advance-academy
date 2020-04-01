@@ -14,15 +14,16 @@ import java.util.List;
 
 public class AdvanceAcademyBarFrame extends JFrame {
 
-    public Repository<Order, String> repo = new ExistingOrdersRepo();
+    public ExistingOrdersRepo repo = new ExistingOrdersRepo();
     public LoginPanel loginPanel;
     public OperationPanel operationPanel;
     public TablePanel tablePanel;
-    public  ProductPanel productPanel;
+    public ProductPanel productPanel;
     public BillPanel billPanel;
     public Waiter currentWaiter;
     public String currentTableNumber;
     public List<Product> products = new ArrayList<>();
+    public Order order = new Order();
 
 
     //static -> to be independent of instances
