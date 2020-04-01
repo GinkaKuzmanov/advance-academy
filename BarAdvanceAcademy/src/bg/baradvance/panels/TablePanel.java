@@ -79,7 +79,8 @@ public class TablePanel extends JPanel implements ActionListener {
 
     }
 
-    private void productFound() {
+    private void productFound(){
+
 
         if (AdvanceAcademyBarFrame.operationState == 1) {
             //OPTION 1  FOUND

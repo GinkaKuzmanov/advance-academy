@@ -1,6 +1,7 @@
 package bg.baradvance.panels;
 
 import bg.baradvance.AdvanceAcademyBarFrame;
+import bg.baradvance.models.Order;
 import bg.baradvance.models.Product;
 import bg.baradvance.repositories.ProductData;
 
@@ -26,9 +27,7 @@ public class ProductPanel extends JPanel {
                     e -> {
                         this.barFrame.products.add(product);
                         barFrame.order.setChosenProducts(this.barFrame.products);
-                        if (AdvanceAcademyBarFrame.operationState == 2) {
-                            barFrame.order.addToExistingOrder(product);
-                        }
+                       //todo add
                     });
             add(jButtonProducts);
         }
@@ -40,6 +39,23 @@ public class ProductPanel extends JPanel {
         applyButton = new JButton("Apply");
 
         eraseOrder.addActionListener(e -> {
+
+
+            if (!barFrame.products.isEmpty() && AdvanceAcademyBarFrame.operationState == 2) {
+                //option 2
+
+                for (Order o : barFrame.repo) {
+
+                    //if (barFrame.currentTableNumber.equals()){
+                       // barFrame.order.addToExistingOrder(o.get);
+                    //}
+
+                }
+
+
+
+            }
+
             int res = JOptionPane.showConfirmDialog(null,
                     "Are you sure you want to delete the order?", "Deletion",
                     JOptionPane.YES_NO_OPTION);
@@ -88,7 +104,7 @@ public class ProductPanel extends JPanel {
                 barFrame.hideProductPanel();
                 barFrame.showOperationPanel();
             }
-        });
+    });
 
     }
 
