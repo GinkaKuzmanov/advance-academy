@@ -83,14 +83,13 @@ public class TablePanel extends JPanel implements ActionListener {
 
         if (AdvanceAcademyBarFrame.operationState == 1) {
             //OPTION 1  FOUND
-            //TODO ADD POPUP ORDER ALREDY EXISTS
             JOptionPane.showMessageDialog(null
                     , "There is already an order for this table",
                     "Warning", JOptionPane.ERROR_MESSAGE);
 
         } else if (AdvanceAcademyBarFrame.operationState == 2) {
             //OPTION 2  FOUND
-            //todo show items panel
+
             barFrame.order.setTableNumber(this.barFrame.currentTableNumber);
             barFrame.order.setWaiter(this.barFrame.currentWaiter);
             barFrame.hideTablePanel();
@@ -107,16 +106,12 @@ public class TablePanel extends JPanel implements ActionListener {
 
         if (AdvanceAcademyBarFrame.operationState == 1) {
             //OPTION 1 NOT FOUND
-            // TODO: initialize the order object and put it into map
-            //todo add table number and waiter to repo
-            //sazdavash order i dobavq6 weiter i table id
             barFrame.order.setTableNumber(this.barFrame.currentTableNumber);
             barFrame.order.setWaiter(this.barFrame.currentWaiter);
             barFrame.hideTablePanel();
             barFrame.showProductPanel();
         } else if (AdvanceAcademyBarFrame.operationState == 2) {
             //OPTION 2 NOT FOUND
-            //TODO: existing option order not =found show message no order yet
 
             if (!barFrame.repo.contains(barFrame.currentTableNumber)) {
                 int choice = JOptionPane.showConfirmDialog(null,
@@ -124,7 +119,6 @@ public class TablePanel extends JPanel implements ActionListener {
                         JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
                     //add order
-                    //todo add table number and waiter to repo
                     barFrame.order.setTableNumber(this.barFrame.currentTableNumber);
                     barFrame.order.setWaiter(this.barFrame.currentWaiter);
                     barFrame.hideTablePanel();
@@ -135,10 +129,6 @@ public class TablePanel extends JPanel implements ActionListener {
                     barFrame.showOperationPanel();
                 }
             }
-//            else{
-//                barFrame.hideTablePanel();
-//                barFrame.showProductPanel();
-//            }
 
         }
         if (AdvanceAcademyBarFrame.operationState == 3) {
@@ -146,6 +136,8 @@ public class TablePanel extends JPanel implements ActionListener {
             JOptionPane.showMessageDialog(null
                     , "No existing order fiound",
                     "No order found", JOptionPane.ERROR_MESSAGE);
+            barFrame.hideTablePanel();
+            barFrame.showOperationPanel();
 
         }
     }
