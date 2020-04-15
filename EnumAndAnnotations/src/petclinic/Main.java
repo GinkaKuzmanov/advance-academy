@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        //for helping structures of data;\
+        //helping structures of data;\
         Map<String, Pet> pets = new LinkedHashMap<>();
         Map<String, Clinic> clinics = new LinkedHashMap<>();
 

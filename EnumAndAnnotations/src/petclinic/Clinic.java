@@ -42,7 +42,7 @@ public class Clinic implements Iterable<Pet> {
     //add pet into the clinic's room here in the Clinic class;
 
     public boolean addPetInClinic(Pet pet) {
-        int centerRoom = clinicSize/2 + 1;
+        int centerRoom = (clinicSize+1)/2;
 
         for (int i = 0; i < centerRoom; i++) {
             if (petInRooms.get(centerRoom - i) == null) {
@@ -69,14 +69,19 @@ public class Clinic implements Iterable<Pet> {
     // until we reach the centre room (3).
 
     public boolean releasePetFromClinic() {
-        int centerRoom = clinicSize/2 + 1;
+        int centerRoom = (clinicSize+1)/2;
         for (int i = centerRoom; i <= clinicSize; i++) {
-
+            /*
+            if here in this version of loop all rooms are empty no return value will be
+            given and therefore code flow continues toward next loop and there we seek to release
+            it will release only one and will break -> because of the return statement;
+            */
             if (petInRooms.get(i) != null) {
                 petInRooms.put(i, null);
                 return true;
             }
         }
+
         for (int i = centerRoom; i >= 1; i--) {
             if (petInRooms.get(i) != null) {
                 petInRooms.put(i, null);

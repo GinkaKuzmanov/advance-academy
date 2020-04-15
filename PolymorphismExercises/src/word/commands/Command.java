@@ -1,4 +1,6 @@
-package word;
+package word.commands;
+
+import word.TextTransform;
 
 public class Command {
     private String text;

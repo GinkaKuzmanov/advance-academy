@@ -1,4 +1,8 @@
-package word;
+package word.commands;
+
+import word.CopyTransform;
+import word.CutTransform;
+import word.TextTransform;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,15 +10,20 @@ import java.util.List;
 import java.util.Map;
 
 public class CommandImpl implements CommandInterface {
-    class ToUpperTransform implements TextTransform {
+
+
+   static class ToUpperTransform implements TextTransform {
         @Override
         public void invokeOn(StringBuilder text, int startIndex, int endIndex){
             for (int i = startIndex; i < endIndex; i++) {
                 text.setCharAt(i, Character.toUpperCase(text.charAt(i)));
             }
+
         }
     }
+            //de-fact a map of commands
     private Map<String, TextTransform> commandTransforms;
+    //received text
     private StringBuilder text;
 
     public CommandImpl(StringBuilder text) {
@@ -44,6 +53,8 @@ public class CommandImpl implements CommandInterface {
     protected List<Command> initCommands() {
         List<Command> commands = new ArrayList<>();
         commands.add(new Command("uppercase", new ToUpperTransform()));
+        commands.add(new Command("cut", new CutTransform()));
+        commands.add(new Command("paste",new CopyTransform(this.text)));
 
         return commands;
     }

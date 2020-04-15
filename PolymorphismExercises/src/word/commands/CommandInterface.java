@@ -1,4 +1,4 @@
-package word;
+package word.commands;
 
 public interface CommandInterface {
     void init();
