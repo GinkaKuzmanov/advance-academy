@@ -1,1 +1,1 @@
-{"C# programmer":[{"fName":"Ginka","mName":"Kalinova","sName":"Kuzmanova","phoneNumber":"0879243354","workExperience":1,"coverLetter":"vdfvdfvdvf"}]}
+[{"fName":"Ginka","mName":"Kalinova","sName":"Kuzmanova","phoneNumber":"0879243354","workExperience":1,"coverLetter":"vdfvdfvdvf"}]

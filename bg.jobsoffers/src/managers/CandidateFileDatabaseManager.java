@@ -4,14 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import entities.Candidate;
-import entities.JobAdvertisement;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 
 public class CandidateFileDatabaseManager {
     public String fileForCandidates = "candidatesInfo.txt";
@@ -33,7 +30,7 @@ public class CandidateFileDatabaseManager {
     }
 
     //May not work through interface, rather than HashMap
-    public HashMap<JobAdvertisement, ArrayList<Candidate>> readDataFromFile() {
+    public ArrayList<Candidate> readDataFromFile() {
         File candidatesFile = new File(fileForCandidates);
         if (!candidatesFile.exists()) {
             System.out.println("File doesn't exist");
@@ -42,7 +39,7 @@ public class CandidateFileDatabaseManager {
         try (InputStreamReader reader = new InputStreamReader(new FileInputStream(candidatesFile),
                 StandardCharsets.UTF_8); JsonReader jReader = new JsonReader(reader)) {
 
-            Type mapType = new TypeToken<HashMap<JobAdvertisement, ArrayList<Candidate>>>() {
+            Type mapType = new TypeToken<ArrayList<Candidate>>() {
             }.getType();
             //returns a Map<JobAdvertisement, ArrayList<Candidate>>>
             log("Data loaded successfully" + fileForCandidates);
@@ -54,33 +51,33 @@ public class CandidateFileDatabaseManager {
     }
 
     //remove user from file
-    public void removeCandidateFrom(JobAdvertisement ad, Candidate person) {
-        File adFile = new File(fileForCandidates);
-        if (!adFile.exists()) {
-            log("File not existing");
-        }
-        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(adFile), "UTF-8");
-             JsonReader jsReader = new JsonReader(isr)) {
-
-            Type mapType = new TypeToken<HashMap<JobAdvertisement, ArrayList<Candidate>>>() {
-            }.getType();
-            HashMap<JobAdvertisement, ArrayList<Candidate>> candidatesMap = new Gson().fromJson(jsReader, mapType);
-
-            candidatesMap.get(ad).removeIf(candidate -> {
-                String cName = candidate.getFName() + candidate.getSName();
-                String pName = person.getFName() + person.getSName();
-                return cName.equals(pName);
-            });
-
-            insertCandidateInto(gson.toJson(candidatesMap,HashMap.class));
-            log("Removed:" + person.getFName() + " " + person.getSName() + "from database");
-
-
-        } catch (IOException e) {
-            log("error");
-        }
-
-    }
+//    public void removeCandidateFrom(JobAdvertisement ad, Candidate person) {
+//        File adFile = new File(fileForCandidates);
+//        if (!adFile.exists()) {
+//            log("File not existing");
+//        }
+//        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(adFile), "UTF-8");
+//             JsonReader jsReader = new JsonReader(isr)) {
+//
+//            Type mapType = new TypeToken<HashMap<JobAdvertisement, ArrayList<Candidate>>>() {
+//            }.getType();
+//            HashMap<JobAdvertisement, ArrayList<Candidate>> candidatesMap = new Gson().fromJson(jsReader, mapType);
+//
+//            candidatesMap.get(ad).removeIf(candidate -> {
+//                String cName = candidate.getFName() + candidate.getSName();
+//                String pName = person.getFName() + person.getSName();
+//                return cName.equals(pName);
+////            });
+//
+//            insertCandidateInto(gson.toJson(candidatesMap,HashMap.class));
+//            log("Removed:" + person.getFName() + " " + person.getSName() + "from database");
+//
+//
+//        } catch (IOException e) {
+//            log("error");
+//        }
+//
+//    }
 
 
     public void log(String string) {

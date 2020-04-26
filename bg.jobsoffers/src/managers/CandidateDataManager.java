@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class CandidateDataManager {
 
-    private Map<JobAdvertisement, ArrayList<Candidate>> firmCandidateMap;
+    private ArrayList<Candidate> candidates;
 
     //set
     public JobAdvertisement adKeyToConnect;
@@ -25,7 +25,7 @@ public class CandidateDataManager {
 
 
     public CandidateDataManager() {
-        this.firmCandidateMap = new HashMap<>();
+        this.candidates = new ArrayList<>();
     }
 
 
@@ -33,10 +33,9 @@ public class CandidateDataManager {
                              String coverLetter) {
 
         Candidate candidate = new Candidate(fName, mName, sName, number, jobXp, coverLetter);
-        connectOfferToCandidate(candidate);
 
         try {
-            this.candidateFileDatabaseManager.insertCandidateInto(json.toJson(this.firmCandidateMap));
+            this.candidateFileDatabaseManager.insertCandidateInto(json.toJson(this.candidates));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,7 +43,7 @@ public class CandidateDataManager {
 
 
     public void loadCandidatesFromDatabase() {
-        this.firmCandidateMap = this.candidateFileDatabaseManager.readDataFromFile();
+
         updateCandidateTable();
     }
 
@@ -52,7 +51,7 @@ public class CandidateDataManager {
     public void updateCandidateTable() {
         this.candidatesModel.setRowCount(0);
         //ot tuk shte update tablicata s vsichki kandidati na opredelena oferta
-        ArrayList<Candidate> cList = provideCandidatesForOffer();
+        ArrayList<Candidate> cList = this.candidateFileDatabaseManager.readDataFromFile();
         //"Names","Phone","Work Experience","Cover Letter"
         for (Candidate candidate : cList) {
             Object[] cDetails = new Object[4];
@@ -64,15 +63,6 @@ public class CandidateDataManager {
         }
     }
 
-    private void connectOfferToCandidate(Candidate candidate) {
-        this.firmCandidateMap.putIfAbsent(this.adKeyToConnect, new ArrayList<>());
-        this.firmCandidateMap.get(this.adKeyToConnect).add(candidate);
-        this.adKeyToConnect.increaseCandidatesCount();
-    }
-
-    private ArrayList<Candidate> provideCandidatesForOffer() {
-        return this.firmCandidateMap.get(this.adKeyToConnect);
-    }
 
 
 }
