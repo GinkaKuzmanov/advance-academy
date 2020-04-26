@@ -8,11 +8,11 @@ import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Map;
 
 public class CandidateDataManager {
 
-    private HashMap<String, ArrayList<Candidate>> firmCandidateMap;
+    private Map<JobAdvertisement, ArrayList<Candidate>> firmCandidateMap;
 
     //set
     public JobAdvertisement adKeyToConnect;
@@ -65,13 +65,13 @@ public class CandidateDataManager {
     }
 
     private void connectOfferToCandidate(Candidate candidate) {
-        this.firmCandidateMap.putIfAbsent(this.adKeyToConnect.getPosition(), new ArrayList<>());
-        this.firmCandidateMap.get(this.adKeyToConnect.getPosition()).add(candidate);
+        this.firmCandidateMap.putIfAbsent(this.adKeyToConnect, new ArrayList<>());
+        this.firmCandidateMap.get(this.adKeyToConnect).add(candidate);
         this.adKeyToConnect.increaseCandidatesCount();
     }
 
     private ArrayList<Candidate> provideCandidatesForOffer() {
-        return this.firmCandidateMap.get(this.adKeyToConnect.getPosition());
+        return this.firmCandidateMap.get(this.adKeyToConnect);
     }
 
 

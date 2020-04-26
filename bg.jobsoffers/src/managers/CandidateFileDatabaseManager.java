@@ -11,7 +11,6 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class CandidateFileDatabaseManager {
@@ -34,7 +33,7 @@ public class CandidateFileDatabaseManager {
     }
 
     //May not work through interface, rather than HashMap
-    public HashMap<String, ArrayList<Candidate>> readDataFromFile() {
+    public HashMap<JobAdvertisement, ArrayList<Candidate>> readDataFromFile() {
         File candidatesFile = new File(fileForCandidates);
         if (!candidatesFile.exists()) {
             System.out.println("File doesn't exist");
@@ -42,11 +41,12 @@ public class CandidateFileDatabaseManager {
 
         try (InputStreamReader reader = new InputStreamReader(new FileInputStream(candidatesFile),
                 StandardCharsets.UTF_8); JsonReader jReader = new JsonReader(reader)) {
-            Type empMapType = new TypeToken<HashMap<String, ArrayList<Candidate>>>(){}.getType();
 
-            HashMap<String,ArrayList<Candidate>> candidatesMap = gson.fromJson(reader,empMapType);
+            Type mapType = new TypeToken<HashMap<JobAdvertisement, ArrayList<Candidate>>>() {
+            }.getType();
+            //returns a Map<JobAdvertisement, ArrayList<Candidate>>>
             log("Data loaded successfully" + fileForCandidates);
-            return candidatesMap;
+            return new Gson().fromJson(reader, mapType);
         } catch (IOException npe) {
             log("an exception occurred.");
             return null;
@@ -59,12 +59,11 @@ public class CandidateFileDatabaseManager {
         if (!adFile.exists()) {
             log("File not existing");
         }
-        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(adFile), StandardCharsets.UTF_8);
+        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(adFile), "UTF-8");
              JsonReader jsReader = new JsonReader(isr)) {
 
-            Type mapType =
-                    new TypeToken<HashMap<JobAdvertisement, ArrayList<Candidate>>>() {}.getType();
-
+            Type mapType = new TypeToken<HashMap<JobAdvertisement, ArrayList<Candidate>>>() {
+            }.getType();
             HashMap<JobAdvertisement, ArrayList<Candidate>> candidatesMap = new Gson().fromJson(jsReader, mapType);
 
             candidatesMap.get(ad).removeIf(candidate -> {

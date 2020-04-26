@@ -54,7 +54,7 @@ public class JobsPanel extends JPanel {
         this.applicantsButton.addActionListener(e -> {
             int index = this.allAdsTable.getSelectedRow();
             if (index != -1) {
-//                setOfferToCandidate();
+                setOfferToCandidate();
                 mainFrame.hideJobsPanel();
                 mainFrame.showCandidatePanel();
             }
@@ -145,10 +145,10 @@ public class JobsPanel extends JPanel {
         }
     }
 
-//    private void setOfferToCandidate() {
-//        ArrayList<JobAdvertisement> temp = mainFrame.dataManager.getJobAds();
-//        int selectedIdx = this.allAdsTable.getSelectedRow();
-//        mainFrame.candidateDataManager.adKeyToConnect = temp.get(selectedIdx);
-//    }
+    private void setOfferToCandidate() {
+        ArrayList<JobAdvertisement> temp = mainFrame.dataManager.getJobAds();
+        int selectedIdx = this.allAdsTable.getSelectedRow();
+        mainFrame.candidateDataManager.adKeyToConnect = temp.get(selectedIdx);
+    }
 
 }

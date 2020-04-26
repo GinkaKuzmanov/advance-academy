@@ -57,7 +57,7 @@ public class AdFileDatabaseManager {
         if (!adFile.exists()) {
             log("File not existing");
         }
-        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(adFile), StandardCharsets.UTF_8);
+        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(adFile), "UTF-8");
              JsonReader jsReader = new JsonReader(isr)) {
 
             Type listType = new TypeToken<ArrayList<JobAdvertisement>>() {

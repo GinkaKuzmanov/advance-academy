@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
 
     //TODO: List here all managers concerned with data
     public AdDataManager dataManager = new AdDataManager();
-    public CandidateDataManager candidateDataManager;
+    public CandidateDataManager candidateDataManager = new CandidateDataManager();
 
     public MainFrame() {
         super("Job offers");
@@ -46,7 +46,6 @@ public class MainFrame extends JFrame {
 
 
         //TODO:model for candidate Table
-
         this.candidateDataManager.candidatesModel = new DefaultTableModel();
         String[] columnsCandidate = {"Names","Phone","Work Experience","Cover Letter"};
         this.candidateDataManager.candidatesModel.setColumnIdentifiers(columnsCandidate);
@@ -56,11 +55,9 @@ public class MainFrame extends JFrame {
 
         //deklaraciite v konstruktora za da se sazdade samo edna instanciq
         this.jobsPanel = new JobsPanel(this);
-        this.candidateDataManager = new CandidateDataManager();
         this.candidatePanel = new CandidatePanel(this);
         this.advertAdditionPanel = new AdvertAdditionPanel(this);
         this.seeAllCandidatesPanel = new SeeAllCandidatesPanel(this);
-
 
 
         showJobsPanel();
