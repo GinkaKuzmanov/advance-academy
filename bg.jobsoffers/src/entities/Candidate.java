@@ -1,6 +1,8 @@
 package entities;
 
 public class Candidate {
+    private String jobPosition;
+    private String firm;
     private String fName;
     private String mName;
     private String sName;
@@ -46,5 +48,21 @@ public class Candidate {
 
     public String getCoverLetter() {
         return coverLetter;
+    }
+
+    public void setJobPosition(String position) {
+        this.jobPosition = jobPosition;
+    }
+
+    public void setFirm(String firm) {
+        this.firm = firm;
+    }
+
+    public String getJobPosition() {
+        return jobPosition;
+    }
+
+    public String getFirm() {
+        return firm;
     }
 }

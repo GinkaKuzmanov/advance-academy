@@ -1,18 +1,18 @@
 package managers;
 
 import com.google.gson.Gson;
+
 import entities.Candidate;
 import entities.JobAdvertisement;
 
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CandidateDataManager {
 
     private ArrayList<Candidate> candidates;
+
 
     //set
     public JobAdvertisement adKeyToConnect;
@@ -26,6 +26,7 @@ public class CandidateDataManager {
 
     public CandidateDataManager() {
         this.candidates = new ArrayList<>();
+
     }
 
 
@@ -33,6 +34,9 @@ public class CandidateDataManager {
                              String coverLetter) {
 
         Candidate candidate = new Candidate(fName, mName, sName, number, jobXp, coverLetter);
+        candidate.setFirm(adKeyToConnect.getFirmName());
+        candidate.setJobPosition(adKeyToConnect.getPosition());
+        this.candidates.add(candidate);
 
         try {
             this.candidateFileDatabaseManager.insertCandidateInto(json.toJson(this.candidates));
@@ -42,27 +46,44 @@ public class CandidateDataManager {
     }
 
 
-    public void loadCandidatesFromDatabase() {
+    public void loadCandidatesFromDatabase(String firm) {
+        this.candidates = this.candidateFileDatabaseManager.readDataFromFile();
+        filterCandidatesByFirm(firm);
 
-        updateCandidateTable();
+
     }
 
 
     public void updateCandidateTable() {
         this.candidatesModel.setRowCount(0);
         //ot tuk shte update tablicata s vsichki kandidati na opredelena oferta
-        ArrayList<Candidate> cList = this.candidateFileDatabaseManager.readDataFromFile();
         //"Names","Phone","Work Experience","Cover Letter"
-        for (Candidate candidate : cList) {
-            Object[] cDetails = new Object[4];
-            cDetails[0] = candidate.getFName() + " " + candidate.getMName() + " " + candidate.getSName();
-            cDetails[1] = candidate.getPhoneNumber();
-            cDetails[2] = candidate.getWorkExperience();
-            cDetails[3] = candidate.getCoverLetter();
-            this.candidatesModel.addRow(cDetails);
+        for (Candidate candidate : candidates) {
+            updateTableModelCandidates(candidate);
+
         }
     }
 
+
+    public void filterCandidatesByFirm(String firm){
+        this.candidatesModel.setRowCount(0);
+        for (Candidate c : candidates) {
+            if(c.getFirm().equals(firm)){
+                updateTableModelCandidates(c);
+            }
+        }
+    }
+
+
+
+    private void updateTableModelCandidates(Candidate c) {
+        Object[] cDetails = new Object[4];
+        cDetails[0] = c.getFName() + " " + c.getMName() + " " + c.getSName();
+        cDetails[1] = c.getPhoneNumber();
+        cDetails[2] = c.getWorkExperience();
+        cDetails[3] = c.getCoverLetter();
+        this.candidatesModel.addRow(cDetails);
+    }
 
 
 }

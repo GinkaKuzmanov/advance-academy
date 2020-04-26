@@ -1,5 +1,4 @@
-import entities.JobAdvertisement;
-import views.JobsPanel;
+
 import views.MainFrame;
 
 public class Main {

@@ -1,6 +1,7 @@
 package views;
 
 import entities.JobAdvertisement;
+import managers.CandidateDataManager;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -54,7 +55,6 @@ public class JobsPanel extends JPanel {
         this.applicantsButton.addActionListener(e -> {
             int index = this.allAdsTable.getSelectedRow();
             if (index != -1) {
-                setOfferToCandidate();
                 mainFrame.hideJobsPanel();
                 mainFrame.showCandidatePanel();
             }
@@ -85,8 +85,9 @@ public class JobsPanel extends JPanel {
         this.showAllCandidatesBtn.addActionListener(e -> {
             int index = this.allAdsTable.getSelectedRow();
             if(index != -1) {
+                setOfferToCandidate(index);
+                filterCandidates();
                 mainFrame.hideJobsPanel();
-                mainFrame.candidateDataManager.loadCandidatesFromDatabase();
                 mainFrame.showAllCandidatesPanel();
             }
         });
@@ -145,10 +146,21 @@ public class JobsPanel extends JPanel {
         }
     }
 
-    private void setOfferToCandidate() {
+    private void setOfferToCandidate(int selectedIdx) {
         ArrayList<JobAdvertisement> temp = mainFrame.dataManager.getJobAds();
-        int selectedIdx = this.allAdsTable.getSelectedRow();
         mainFrame.candidateDataManager.adKeyToConnect = temp.get(selectedIdx);
     }
+
+    private void filterCandidates(){
+        int currentIdx = this.allAdsTable.getSelectedRow();
+        TableModel adsModel = this.allAdsTable.getModel();
+        if(currentIdx != -1){
+            String firm = (String) adsModel.getValueAt(currentIdx,0);
+            mainFrame.candidateDataManager.loadCandidatesFromDatabase(firm);
+        }
+
+    }
+
+
 
 }

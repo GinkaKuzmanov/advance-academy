@@ -1,1 +1,1 @@
-[{"fName":"Ginka","mName":"Kalinova","sName":"Kuzmanova","phoneNumber":"0879243354","workExperience":1,"coverLetter":"vdfvdfvdvf"}]
+[{"firm":"Strings Ltd.","fName":"Ginka","mName":"Kalinova","sName":"Kuzmanova","phoneNumber":"0893838281","workExperience":1,"coverLetter":"nice"},{"firm":"Schibsted Sweden","fName":"Yordan","mName":"Antonov","sName":"Petrov","phoneNumber":"0893828282","workExperience":2,"coverLetter":"nice"}]
