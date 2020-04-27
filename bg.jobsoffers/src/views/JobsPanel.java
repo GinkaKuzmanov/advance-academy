@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
 
-//TODO:Dva butona pokaji kandidati i pokaji vsichki obqvi
 
 public class JobsPanel extends JPanel {
     //za da imam dostap do modeli i view
