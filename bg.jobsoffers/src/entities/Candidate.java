@@ -1,7 +1,7 @@
 package entities;
 
 public class Candidate {
-    private String jobPosition;
+
     private String firm;
     private String fName;
     private String mName;
@@ -50,17 +50,10 @@ public class Candidate {
         return coverLetter;
     }
 
-    public void setJobPosition(String position) {
-        this.jobPosition = jobPosition;
-    }
-
     public void setFirm(String firm) {
         this.firm = firm;
     }
 
-    public String getJobPosition() {
-        return jobPosition;
-    }
 
     public String getFirm() {
         return firm;

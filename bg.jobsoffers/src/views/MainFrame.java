@@ -45,7 +45,7 @@ public class MainFrame extends JFrame {
         this.dataManager.firmsOnlyModel.setColumnIdentifiers(firmIdentifier);
 
 
-        //TODO:model for candidate Table
+        //model for candidate Table
         this.candidateDataManager.candidatesModel = new DefaultTableModel();
         String[] columnsCandidate = {"Names","Phone","Work Experience","Cover Letter"};
         this.candidateDataManager.candidatesModel.setColumnIdentifiers(columnsCandidate);

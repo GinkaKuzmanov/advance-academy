@@ -35,9 +35,8 @@ public class CandidateDataManager {
 
         Candidate candidate = new Candidate(fName, mName, sName, number, jobXp, coverLetter);
         candidate.setFirm(adKeyToConnect.getFirmName());
-        candidate.setJobPosition(adKeyToConnect.getPosition());
+        adKeyToConnect.increaseCandidatesCount();
         this.candidates.add(candidate);
-
         try {
             this.candidateFileDatabaseManager.insertCandidateInto(json.toJson(this.candidates));
         } catch (IOException e) {
@@ -49,19 +48,6 @@ public class CandidateDataManager {
     public void loadCandidatesFromDatabase(String firm) {
         this.candidates = this.candidateFileDatabaseManager.readDataFromFile();
         filterCandidatesByFirm(firm);
-
-
-    }
-
-
-    public void updateCandidateTable() {
-        this.candidatesModel.setRowCount(0);
-        //ot tuk shte update tablicata s vsichki kandidati na opredelena oferta
-        //"Names","Phone","Work Experience","Cover Letter"
-        for (Candidate candidate : candidates) {
-            updateTableModelCandidates(candidate);
-
-        }
     }
 
 

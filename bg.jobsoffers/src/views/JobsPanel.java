@@ -1,7 +1,7 @@
 package views;
 
 import entities.JobAdvertisement;
-import managers.CandidateDataManager;
+
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -49,8 +49,8 @@ public class JobsPanel extends JPanel {
         add(searchBtn);
 
 
-        //TODO: through button apply now I will add the jobOffer to my Map
-        //TODO: only if index != -1 switch views and go to candidatePanel
+
+        // only if index != -1 switch views and go to candidatePanel
         this.applicantsButton = new JButton("APPLY FOR");
         this.applicantsButton.addActionListener(e -> {
             int index = this.allAdsTable.getSelectedRow();
@@ -86,7 +86,7 @@ public class JobsPanel extends JPanel {
             int index = this.allAdsTable.getSelectedRow();
             if(index != -1) {
                 setOfferToCandidate(index);
-                filterCandidates();
+                filterCandidateTable(index);
                 mainFrame.hideJobsPanel();
                 mainFrame.showAllCandidatesPanel();
             }
@@ -119,7 +119,7 @@ public class JobsPanel extends JPanel {
 
         mainFrame.dataManager.loadFirmsFromDatabase();
 
-      
+
 
         setVisible(true);
     }
@@ -151,16 +151,10 @@ public class JobsPanel extends JPanel {
         mainFrame.candidateDataManager.adKeyToConnect = temp.get(selectedIdx);
     }
 
-    private void filterCandidates(){
-        int currentIdx = this.allAdsTable.getSelectedRow();
-        TableModel adsModel = this.allAdsTable.getModel();
-        if(currentIdx != -1){
-            String firm = (String) adsModel.getValueAt(currentIdx,0);
-            mainFrame.candidateDataManager.loadCandidatesFromDatabase(firm);
-        }
-
+    public void filterCandidateTable(int index){
+        TableModel model = this.allAdsTable.getModel();
+        String firm = (String) model.getValueAt(index,0);
+        mainFrame.candidateDataManager.loadCandidatesFromDatabase(firm);
     }
-
-
 
 }

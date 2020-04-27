@@ -50,35 +50,6 @@ public class CandidateFileDatabaseManager {
         }
     }
 
-    //remove user from file
-//    public void removeCandidateFrom(JobAdvertisement ad, Candidate person) {
-//        File adFile = new File(fileForCandidates);
-//        if (!adFile.exists()) {
-//            log("File not existing");
-//        }
-//        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(adFile), "UTF-8");
-//             JsonReader jsReader = new JsonReader(isr)) {
-//
-//            Type mapType = new TypeToken<HashMap<JobAdvertisement, ArrayList<Candidate>>>() {
-//            }.getType();
-//            HashMap<JobAdvertisement, ArrayList<Candidate>> candidatesMap = new Gson().fromJson(jsReader, mapType);
-//
-//            candidatesMap.get(ad).removeIf(candidate -> {
-//                String cName = candidate.getFName() + candidate.getSName();
-//                String pName = person.getFName() + person.getSName();
-//                return cName.equals(pName);
-////            });
-//
-//            insertCandidateInto(gson.toJson(candidatesMap,HashMap.class));
-//            log("Removed:" + person.getFName() + " " + person.getSName() + "from database");
-//
-//
-//        } catch (IOException e) {
-//            log("error");
-//        }
-//
-//    }
-
 
     public void log(String string) {
         System.out.println(string);
