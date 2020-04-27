@@ -52,15 +52,14 @@ public class CandidateDataManager {
     }
 
 
-    public void filterCandidatesByFirm(String firm){
+    public void filterCandidatesByFirm(String firm) {
         this.candidatesModel.setRowCount(0);
         for (Candidate c : candidates) {
-            if(c.getFirm().equals(firm)){
+            if (c.getFirm().equals(firm)) {
                 updateTableModelCandidates(c);
             }
         }
     }
-
 
 
     private void updateTableModelCandidates(Candidate c) {

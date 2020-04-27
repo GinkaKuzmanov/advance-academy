@@ -49,7 +49,6 @@ public class JobsPanel extends JPanel {
         add(searchBtn);
 
 
-
         // only if index != -1 switch views and go to candidatePanel
         this.applicantsButton = new JButton("APPLY FOR");
         this.applicantsButton.addActionListener(e -> {
@@ -84,7 +83,7 @@ public class JobsPanel extends JPanel {
         this.showAllCandidatesBtn = new JButton("ALL CANDIDATES");
         this.showAllCandidatesBtn.addActionListener(e -> {
             int index = this.allAdsTable.getSelectedRow();
-            if(index != -1) {
+            if (index != -1) {
                 setOfferToCandidate(index);
                 filterCandidateTable(index);
                 mainFrame.hideJobsPanel();
@@ -92,8 +91,6 @@ public class JobsPanel extends JPanel {
             }
         });
         add(this.showAllCandidatesBtn);
-
-
 
 
         //tablica s obiavite
@@ -120,16 +117,14 @@ public class JobsPanel extends JPanel {
         mainFrame.dataManager.loadFirmsFromDatabase();
 
 
-
         setVisible(true);
     }
 
 
-
-    private void removeContentFromAdTable(){
+    private void removeContentFromAdTable() {
         int index = this.allAdsTable.getSelectedRow();
 
-        if(index != -1) {
+        if (index != -1) {
             mainFrame.dataManager.removeAdTableData(index);
         }
     }
@@ -140,7 +135,7 @@ public class JobsPanel extends JPanel {
         int index = this.firmsTable.getSelectedRow();
         TableModel firmModel = this.firmsTable.getModel();
 
-        if(index != -1) {
+        if (index != -1) {
             String selectedFirm = (String) firmModel.getValueAt(index, 0);
             mainFrame.dataManager.searchByFirmName(selectedFirm);
         }
@@ -151,9 +146,9 @@ public class JobsPanel extends JPanel {
         mainFrame.candidateDataManager.adKeyToConnect = temp.get(selectedIdx);
     }
 
-    public void filterCandidateTable(int index){
+    public void filterCandidateTable(int index) {
         TableModel model = this.allAdsTable.getModel();
-        String firm = (String) model.getValueAt(index,0);
+        String firm = (String) model.getValueAt(index, 0);
         mainFrame.candidateDataManager.loadCandidatesFromDatabase(firm);
     }
 

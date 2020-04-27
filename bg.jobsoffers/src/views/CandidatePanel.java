@@ -36,8 +36,8 @@ public class CandidatePanel extends JPanel {
 //Dobavqne na kandidata kym file s ofertata
         apply = new JButton("Submit");
         this.apply.addActionListener(e -> {
-        createCandidate();
-        resetContent();
+            createCandidate();
+            resetContent();
         });
 
 
@@ -69,9 +69,9 @@ public class CandidatePanel extends JPanel {
                     phone,
                     Integer.parseInt(xp),
                     cover);
-        }else{
-            JOptionPane.showMessageDialog(null,"Enter years in experience and 10 digits as phone number",
-                    "Input information",JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Enter years in experience and 10 digits as phone number",
+                    "Input information", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -89,7 +89,7 @@ public class CandidatePanel extends JPanel {
         return experienceField.getText().matches("\\d+") && phoneNumberField.getText().matches("[0-9]{10}");
     }
 
-    private void resetContent(){
+    private void resetContent() {
         firstNameField.setText("First Name:");
         midNameField.setText("Middle Name");
         surnameField.setText("Last Name:");

@@ -1,7 +1,7 @@
 package entities;
 
 public enum JobDuration {
-    PERMANENT,TEMPORARY;
+    PERMANENT, TEMPORARY;
 
     @Override
     public String toString() {

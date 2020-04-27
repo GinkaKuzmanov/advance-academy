@@ -1,7 +1,6 @@
 package views;
 
 
-
 import managers.AdDataManager;
 import managers.CandidateDataManager;
 
@@ -18,11 +17,9 @@ public class MainFrame extends JFrame {
     public AdvertAdditionPanel advertAdditionPanel;
 
 
-    //TODO:connect the panel to Frame
     public SeeAllCandidatesPanel seeAllCandidatesPanel;
 
 
-    //TODO: List here all managers concerned with data
     public AdDataManager dataManager = new AdDataManager();
     public CandidateDataManager candidateDataManager = new CandidateDataManager();
 
@@ -47,10 +44,8 @@ public class MainFrame extends JFrame {
 
         //model for candidate Table
         this.candidateDataManager.candidatesModel = new DefaultTableModel();
-        String[] columnsCandidate = {"Names","Phone","Work Experience","Cover Letter"};
+        String[] columnsCandidate = {"Names", "Phone", "Work Experience", "Cover Letter"};
         this.candidateDataManager.candidatesModel.setColumnIdentifiers(columnsCandidate);
-
-
 
 
         //deklaraciite v konstruktora za da se sazdade samo edna instanciq
@@ -99,17 +94,16 @@ public class MainFrame extends JFrame {
         remove(this.advertAdditionPanel);
     }
 
-    public void showAllCandidatesPanel(){
+    public void showAllCandidatesPanel() {
         this.seeAllCandidatesPanel.setVisible(true);
         this.seeAllCandidatesPanel.setSize(getSize());
         add(this.seeAllCandidatesPanel);
     }
 
-    public void hideAllCandidatesPanel(){
+    public void hideAllCandidatesPanel() {
         this.seeAllCandidatesPanel.setVisible(false);
         remove(this.seeAllCandidatesPanel);
     }
-
 
 
 }

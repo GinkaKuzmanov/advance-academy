@@ -15,7 +15,7 @@ public class SeeAllCandidatesPanel extends JPanel {
 
     public JButton returnButton;
 
-    public SeeAllCandidatesPanel(MainFrame mainFrame){
+    public SeeAllCandidatesPanel(MainFrame mainFrame) {
         super();
         this.mainFrame = mainFrame;
 
@@ -35,7 +35,6 @@ public class SeeAllCandidatesPanel extends JPanel {
 
 
     }
-
 
 
 }

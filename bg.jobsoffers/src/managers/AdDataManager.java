@@ -55,7 +55,8 @@ public class AdDataManager {
             e.printStackTrace();
         }
     }
-        //USAGE IN MAP FOR KEY
+
+    //USAGE IN MAP FOR KEY
     public ArrayList<JobAdvertisement> getJobAds() {
         return this.jobAds;
     }
@@ -112,7 +113,7 @@ public class AdDataManager {
     public void searchByFirmName(String firmName) {
         this.model.setRowCount(0);
         for (JobAdvertisement ad : jobAds) {
-            if (ad.getFirmName().equals(firmName)){
+            if (ad.getFirmName().equals(firmName)) {
                 updateTableModel(ad);
             }
         }
@@ -130,7 +131,6 @@ public class AdDataManager {
         }
         isFound(isHere);
     }
-
 
 
     private void updateTableModel(JobAdvertisement jobAdvertisement) {
