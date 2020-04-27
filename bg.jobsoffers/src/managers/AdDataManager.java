@@ -1,6 +1,7 @@
 package managers;
 
 import com.google.gson.Gson;
+import dataservices.AdFileDatabaseManager;
 import entities.JobAdvertisement;
 
 import javax.swing.table.DefaultTableModel;
@@ -60,7 +61,7 @@ public class AdDataManager {
     }
 
     public void loadFromDatabase() {
-        this.jobAds = this.database.readDataFromFile();
+        this.jobAds = this.database.readData();
         updateAdTableData();
 
     }
@@ -99,7 +100,7 @@ public class AdDataManager {
             //update the set together with the list
             this.advertisementSet.remove(ad.getFirmName());
             this.jobAds.remove(selectedRowIdx);
-            this.database.removeAdvertisement(ad);
+            this.database.removeFrom(ad);
 
             updateAdTableData();
             updateFirmTableData();

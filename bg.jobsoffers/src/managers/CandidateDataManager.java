@@ -2,6 +2,7 @@ package managers;
 
 import com.google.gson.Gson;
 
+import dataservices.CandidateFileDatabaseManager;
 import entities.Candidate;
 import entities.JobAdvertisement;
 
@@ -38,7 +39,7 @@ public class CandidateDataManager {
         adKeyToConnect.increaseCandidatesCount();
         this.candidates.add(candidate);
         try {
-            this.candidateFileDatabaseManager.insertCandidateInto(json.toJson(this.candidates));
+            this.candidateFileDatabaseManager.insertInto(json.toJson(this.candidates));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,7 +47,7 @@ public class CandidateDataManager {
 
 
     public void loadCandidatesFromDatabase(String firm) {
-        this.candidates = this.candidateFileDatabaseManager.readDataFromFile();
+        this.candidates = this.candidateFileDatabaseManager.readData();
         filterCandidatesByFirm(firm);
     }
 

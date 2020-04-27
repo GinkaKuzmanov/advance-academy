@@ -1,16 +1,17 @@
-package managers;
+package dataservices;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import entities.JobAdvertisement;
+import managers.DataService;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class AdFileDatabaseManager {
+public class AdFileDatabaseManager implements DataService<JobAdvertisement> {
 
     public String fileDataForAds = "advertisementsInfo.txt";
     public Gson gson = new Gson();
@@ -31,7 +32,7 @@ public class AdFileDatabaseManager {
     }
 
 
-    public ArrayList<JobAdvertisement> readDataFromFile() {
+    public ArrayList<JobAdvertisement> readData() {
         File adFile = new File(fileDataForAds);
         if (!adFile.exists()) {
             System.out.println("File doesn't exist");
@@ -52,7 +53,7 @@ public class AdFileDatabaseManager {
     }
 
     //remove user from file
-    public void removeAdvertisement(JobAdvertisement jobAd) {
+    public void removeFrom(JobAdvertisement jobAd) {
         File adFile = new File(fileDataForAds);
         if (!adFile.exists()) {
             log("File not existing");

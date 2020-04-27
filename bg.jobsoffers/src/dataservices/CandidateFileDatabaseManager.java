@@ -1,22 +1,23 @@
-package managers;
+package dataservices;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import entities.Candidate;
+import managers.DataService;
 
 import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class CandidateFileDatabaseManager {
+public class CandidateFileDatabaseManager implements DataService<Candidate> {
     public String fileForCandidates = "candidatesInfo.txt";
     public Gson gson = new Gson();
 
     //insert into file
 
-    public void insertCandidateInto(String myData) throws IOException {
+    public void insertInto(String myData) throws IOException {
         File candidatesFile = new File(fileForCandidates);
         if (!candidatesFile.exists()) {
             candidatesFile.createNewFile();
@@ -29,8 +30,8 @@ public class CandidateFileDatabaseManager {
         }
     }
 
-    //May not work through interface, rather than HashMap
-    public ArrayList<Candidate> readDataFromFile() {
+
+    public ArrayList<Candidate> readData() {
         File candidatesFile = new File(fileForCandidates);
         if (!candidatesFile.exists()) {
             System.out.println("File doesn't exist");
@@ -50,9 +51,33 @@ public class CandidateFileDatabaseManager {
         }
     }
 
+    public void removeFrom(Candidate c) {
+        File adFile = new File(fileForCandidates);
+        if (!adFile.exists()) {
+            log("File not existing");
+        }
+        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(adFile), "UTF-8");
+             JsonReader jsReader = new JsonReader(isr)) {
+
+            Type listType = new TypeToken<ArrayList<Candidate>>() {
+            }.getType();
+            ArrayList<Candidate> candidates = new Gson().fromJson(jsReader, listType);
+            for (Candidate c1 : candidates) {
+                if (c1.getFName().equals(c.getFName())) {
+                    candidates.remove(c1);
+                    insertInto(gson.toJson(candidates));
+                    log("Removed:" + c1.getSName() + " " + c1.getFirm() + "from database");
+                    break;
+                }
+            }
+
+        } catch (IOException e) {
+            log("error");
+        }
+    }
 
     public void log(String string) {
         System.out.println(string);
     }
-
 }
+
