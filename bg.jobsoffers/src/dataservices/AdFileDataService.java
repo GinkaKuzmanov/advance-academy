@@ -44,7 +44,7 @@ public class AdFileDataService implements DataService<JobAdvertisement> {
             Type listType = new TypeToken<ArrayList<JobAdvertisement>>() {
             }.getType();
             //returns an ArrayList<JobAdvertisements>;
-            log("Data loaded successfully" + fileDataForAds);
+//            log("Data loaded successfully" + fileDataForAds);
             return new Gson().fromJson(reader, listType);
         } catch (IOException npe) {
             log("an exception occurred.");
@@ -58,7 +58,7 @@ public class AdFileDataService implements DataService<JobAdvertisement> {
         if (!adFile.exists()) {
             log("File not existing");
         }
-        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(adFile), "UTF-8");
+        try (InputStreamReader isr = new InputStreamReader(new FileInputStream(adFile), StandardCharsets.UTF_8);
              JsonReader jsReader = new JsonReader(isr)) {
 
             Type listType = new TypeToken<ArrayList<JobAdvertisement>>() {
