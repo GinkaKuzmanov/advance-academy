@@ -3,6 +3,7 @@ package entities;
 public class Candidate {
 
     private String firm;
+    private String position;
     private String fName;
     private String mName;
     private String sName;
@@ -54,8 +55,15 @@ public class Candidate {
         this.firm = firm;
     }
 
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
     public String getFirm() {
         return firm;
+    }
+
+    public String getPosition() {
+        return this.position;
     }
 }

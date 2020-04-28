@@ -53,6 +53,7 @@ public class JobsPanel extends JPanel {
         this.applicantsButton.addActionListener(e -> {
             int index = this.allAdsTable.getSelectedRow();
             if (index != -1) {
+                setOfferToCandidate(index);
                 mainFrame.hideJobsPanel();
                 mainFrame.showCandidatePanel();
             }
@@ -83,7 +84,6 @@ public class JobsPanel extends JPanel {
         this.showAllCandidatesBtn.addActionListener(e -> {
             int index = this.allAdsTable.getSelectedRow();
             if (index != -1) {
-                setOfferToCandidate(index);
                 filterCandidateTable(index);
                 mainFrame.hideJobsPanel();
                 mainFrame.showAllCandidatesPanel();
@@ -148,7 +148,8 @@ public class JobsPanel extends JPanel {
     public void filterCandidateTable(int index) {
         TableModel model = this.allAdsTable.getModel();
         String firm = (String) model.getValueAt(index, 0);
-        mainFrame.candidateDataManager.loadCandidatesFromDatabase(firm);
+        String position = (String) model.getValueAt(index,1);
+        mainFrame.candidateDataManager.loadCandidatesFromDatabase(firm,position);
     }
 
 }

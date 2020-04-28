@@ -1,7 +1,7 @@
 package managers;
 
 import com.google.gson.Gson;
-import dataservices.AdFileDatabaseManager;
+import dataservices.AdFileDataService;
 import entities.JobAdvertisement;
 
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +21,7 @@ public class AdDataManager {
 
     public DefaultTableModel firmsOnlyModel;
 
-    public AdFileDatabaseManager database = new AdFileDatabaseManager();
+    public DataService<JobAdvertisement> database = new AdFileDataService();
 
     public Gson json = new Gson();
 

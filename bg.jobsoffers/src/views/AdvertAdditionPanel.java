@@ -61,6 +61,9 @@ public class AdvertAdditionPanel extends JPanel {
             String description = this.descriptionField.getText();
 
             mainFrame.dataManager.addAdvertisement(name, position, duration, description);
+        } else {
+            JOptionPane.showMessageDialog(null, "There is no information in the fields.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }

@@ -2,7 +2,7 @@ package managers;
 
 import com.google.gson.Gson;
 
-import dataservices.CandidateFileDatabaseManager;
+import dataservices.CandidateFileDataService;
 import entities.Candidate;
 import entities.JobAdvertisement;
 
@@ -20,7 +20,7 @@ public class CandidateDataManager {
     //set
     public DefaultTableModel candidatesModel;
 
-    public CandidateFileDatabaseManager candidateFileDatabaseManager = new CandidateFileDatabaseManager();
+    public DataService<Candidate> candidateFileDataService = new CandidateFileDataService();
 
     public Gson json = new Gson();
 
@@ -36,26 +36,29 @@ public class CandidateDataManager {
 
         Candidate candidate = new Candidate(fName, mName, sName, number, jobXp, coverLetter);
         candidate.setFirm(adKeyToConnect.getFirmName());
+        candidate.setPosition(adKeyToConnect.getPosition());
+
         adKeyToConnect.increaseCandidatesCount();
         this.candidates.add(candidate);
         try {
-            this.candidateFileDatabaseManager.insertInto(json.toJson(this.candidates));
+            this.candidateFileDataService.insertInto(json.toJson(this.candidates));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
 
-    public void loadCandidatesFromDatabase(String firm) {
-        this.candidates = this.candidateFileDatabaseManager.readData();
-        filterCandidatesByFirm(firm);
+    public void loadCandidatesFromDatabase(String firm, String position) {
+        this.candidates = this.candidateFileDataService.readData();
+        filterCandidatesByFirm(firm, position);
     }
 
 
-    public void filterCandidatesByFirm(String firm) {
+    public void filterCandidatesByFirm(String firm, String position) {
         this.candidatesModel.setRowCount(0);
         for (Candidate c : candidates) {
-            if (c.getFirm().equals(firm)) {
+
+            if (c.getFirm().equals(firm) && c.getPosition().equals(position)) {
                 updateTableModelCandidates(c);
             }
         }

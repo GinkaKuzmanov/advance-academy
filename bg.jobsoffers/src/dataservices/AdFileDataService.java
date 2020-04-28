@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class AdFileDatabaseManager implements DataService<JobAdvertisement> {
+public class AdFileDataService implements DataService<JobAdvertisement> {
 
     public String fileDataForAds = "advertisementsInfo.txt";
     public Gson gson = new Gson();
