@@ -1,6 +1,8 @@
 package views;
 
 
+import dataservices.AdFileDataService;
+import dataservices.CandidateFileDataService;
 import managers.AdDataManager;
 import managers.CandidateDataManager;
 
@@ -14,16 +16,18 @@ public class MainFrame extends JFrame {
     public static int currentIdxAd;
 
     final Dimension dimension = new Dimension(800, 600);
+
     public JobsPanel jobsPanel;
     public CandidatePanel candidatePanel;
     public AdvertAdditionPanel advertAdditionPanel;
-
-
     public SeeAllCandidatesPanel seeAllCandidatesPanel;
 
 
-    public AdDataManager dataManager = new AdDataManager();
-    public CandidateDataManager candidateDataManager = new CandidateDataManager();
+    public AdDataManager dataManager =
+            new AdDataManager(new AdFileDataService());
+
+    public CandidateDataManager candidateDataManager =
+            new CandidateDataManager(new CandidateFileDataService());
 
     public MainFrame() {
         super("Job offers");
@@ -32,22 +36,10 @@ public class MainFrame extends JFrame {
         setLayout(new GridLayout());
 
 
-        //model for the ad table
-        this.dataManager.model = new DefaultTableModel();
-
-        String[] columnIdentifiers =
-                {"Name", "Position", "Duration", "Description", "Candidates"};
-        this.dataManager.model.setColumnIdentifiers(columnIdentifiers);
-
-        this.dataManager.firmsOnlyModel = new DefaultTableModel();
-        String[] firmIdentifier = {"FILTER /FIRM/"};
-        this.dataManager.firmsOnlyModel.setColumnIdentifiers(firmIdentifier);
-
-
-        //model for candidate Table
-        this.candidateDataManager.candidatesModel = new DefaultTableModel();
-        String[] columnsCandidate = {"Names", "Phone", "Work Experience", "Cover Letter"};
-        this.candidateDataManager.candidatesModel.setColumnIdentifiers(columnsCandidate);
+        //models tables
+        modelForTheAdTable();
+        modelForFirmTable();
+        modelForCandidateTable();
 
 
         //deklaraciite v konstruktora za da se sazdade samo edna instanciq
@@ -58,6 +50,26 @@ public class MainFrame extends JFrame {
 
 
         showJobsPanel();
+    }
+
+    private void modelForCandidateTable() {
+        this.candidateDataManager.candidatesModel = new DefaultTableModel();
+        String[] columnsCandidate = {"Names", "Phone", "Work Experience", "Cover Letter"};
+        this.candidateDataManager.candidatesModel.setColumnIdentifiers(columnsCandidate);
+    }
+
+    private void modelForFirmTable() {
+        this.dataManager.firmsOnlyModel = new DefaultTableModel();
+        String[] firmIdentifier = {"FILTER /FIRM/"};
+        this.dataManager.firmsOnlyModel.setColumnIdentifiers(firmIdentifier);
+    }
+
+    private void modelForTheAdTable() {
+        this.dataManager.model = new DefaultTableModel();
+
+        String[] columnIdentifiers =
+                {"Name", "Position", "Duration", "Description", "Candidates"};
+        this.dataManager.model.setColumnIdentifiers(columnIdentifiers);
     }
 
 

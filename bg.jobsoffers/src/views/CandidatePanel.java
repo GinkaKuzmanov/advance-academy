@@ -81,10 +81,10 @@ public class CandidatePanel extends JPanel {
         }
     }
 
-    private void saveIncrementedValues(){
+    private void saveIncrementedValues() {
         ArrayList<JobAdvertisement> refresh = mainFrame.dataManager.getJobAds();
         JobAdvertisement value = mainFrame.candidateDataManager.adKeyToConnect;
-        refresh.set(MainFrame.currentIdxAd,value);
+        refresh.set(MainFrame.currentIdxAd, value);
         mainFrame.dataManager.setJobAds(refresh);
 
         try {

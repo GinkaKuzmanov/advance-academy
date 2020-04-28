@@ -2,7 +2,6 @@ package managers;
 
 import com.google.gson.Gson;
 
-import dataservices.CandidateFileDataService;
 import entities.Candidate;
 import entities.JobAdvertisement;
 
@@ -20,13 +19,14 @@ public class CandidateDataManager {
     //set
     public DefaultTableModel candidatesModel;
 
-    public DataService<Candidate> candidateFileDataService = new CandidateFileDataService();
+    public DataService<Candidate> candidateFileDataService;
 
     public Gson json = new Gson();
 
 
-    public CandidateDataManager() {
+    public CandidateDataManager(DataService<Candidate> candidateData) {
         this.candidates = new ArrayList<>();
+        this.candidateFileDataService = candidateData;
 
     }
 

@@ -34,8 +34,8 @@ public class JobsPanel extends JPanel {
     public JobsPanel(MainFrame mainFrame) {
         super();
         this.mainFrame = mainFrame;
-        //opcia za tarsene po poziciq
 
+        //opcia za tarsene po poziciq
         this.searchField = new JTextField("Search:");
         add(searchField);
 
@@ -92,25 +92,10 @@ public class JobsPanel extends JPanel {
         });
         add(this.showAllCandidatesBtn);
 
-
         //tablica s obiavite
-        this.allAdsTable = new JTable();
-        this.allAdsTable.setDefaultEditor(Object.class, null);
-        JScrollPane pane = new JScrollPane();
-
-        this.allAdsTable.setModel(mainFrame.dataManager.model);
-        pane.setViewportView(this.allAdsTable);
-        add(pane);
-
-
+        tableWithAds(mainFrame);
         //tablica s firmite
-        this.firmsTable = new JTable();
-        this.firmsTable.setDefaultEditor(Object.class, null);
-        JScrollPane firmPane = new JScrollPane();
-
-        this.firmsTable.setModel(mainFrame.dataManager.firmsOnlyModel);
-        firmPane.setViewportView(this.firmsTable);
-        add(firmPane);
+        tableWithFirms(mainFrame);
 
         mainFrame.dataManager.loadFromDatabase();
 
@@ -118,6 +103,26 @@ public class JobsPanel extends JPanel {
 
 
         setVisible(true);
+    }
+
+    private void tableWithAds(MainFrame mainFrame) {
+        this.allAdsTable = new JTable();
+        this.allAdsTable.setDefaultEditor(Object.class, null);
+        JScrollPane pane = new JScrollPane();
+
+        this.allAdsTable.setModel(mainFrame.dataManager.model);
+        pane.setViewportView(this.allAdsTable);
+        add(pane);
+    }
+
+    private void tableWithFirms(MainFrame mainFrame) {
+        this.firmsTable = new JTable();
+        this.firmsTable.setDefaultEditor(Object.class, null);
+        JScrollPane firmPane = new JScrollPane();
+
+        this.firmsTable.setModel(mainFrame.dataManager.firmsOnlyModel);
+        firmPane.setViewportView(this.firmsTable);
+        add(firmPane);
     }
 
 
@@ -147,10 +152,10 @@ public class JobsPanel extends JPanel {
 
     }
 
-    public void filterCandidateTable(int index) {
+    private void filterCandidateTable(int index) {
         TableModel model = this.allAdsTable.getModel();
         String firm = (String) model.getValueAt(index, 0);
-        String position = (String) model.getValueAt(index,1);
+        String position = (String) model.getValueAt(index, 1);
         mainFrame.candidateDataManager.loadCandidatesFromDatabase();
         mainFrame.candidateDataManager.filterCandidatesByFirm(firm, position);
     }
