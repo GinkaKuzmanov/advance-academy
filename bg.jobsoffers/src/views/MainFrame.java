@@ -11,6 +11,8 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
 
+    public static int currentIdxAd;
+
     final Dimension dimension = new Dimension(800, 600);
     public JobsPanel jobsPanel;
     public CandidatePanel candidatePanel;

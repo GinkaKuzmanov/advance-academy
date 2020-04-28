@@ -48,9 +48,9 @@ public class CandidateDataManager {
     }
 
 
-    public void loadCandidatesFromDatabase(String firm, String position) {
+    public void loadCandidatesFromDatabase() {
         this.candidates = this.candidateFileDataService.readData();
-        filterCandidatesByFirm(firm, position);
+
     }
 
 

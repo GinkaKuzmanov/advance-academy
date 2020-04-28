@@ -1,6 +1,11 @@
 package views;
 
+import com.google.gson.Gson;
+import entities.JobAdvertisement;
+
 import javax.swing.*;
+import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class CandidatePanel extends JPanel {
@@ -37,6 +42,7 @@ public class CandidatePanel extends JPanel {
         apply = new JButton("Submit");
         this.apply.addActionListener(e -> {
             createCandidate();
+            saveIncrementedValues();
             resetContent();
         });
 
@@ -72,6 +78,19 @@ public class CandidatePanel extends JPanel {
         } else {
             JOptionPane.showMessageDialog(null, "Enter years in experience and 10 digits as phone number",
                     "Input information", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    private void saveIncrementedValues(){
+        ArrayList<JobAdvertisement> refresh = mainFrame.dataManager.getJobAds();
+        JobAdvertisement value = mainFrame.candidateDataManager.adKeyToConnect;
+        refresh.set(MainFrame.currentIdxAd,value);
+        mainFrame.dataManager.setJobAds(refresh);
+
+        try {
+            mainFrame.dataManager.database.insertInto(new Gson().toJson(refresh));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

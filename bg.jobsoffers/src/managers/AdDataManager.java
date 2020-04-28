@@ -61,6 +61,10 @@ public class AdDataManager {
         return this.jobAds;
     }
 
+    public void setJobAds(ArrayList<JobAdvertisement> jobAds) {
+        this.jobAds = jobAds;
+    }
+
     public void loadFromDatabase() {
         this.jobAds = this.database.readData();
         updateAdTableData();

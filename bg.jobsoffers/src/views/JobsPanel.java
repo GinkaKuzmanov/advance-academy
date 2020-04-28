@@ -52,6 +52,7 @@ public class JobsPanel extends JPanel {
         this.applicantsButton = new JButton("APPLY FOR");
         this.applicantsButton.addActionListener(e -> {
             int index = this.allAdsTable.getSelectedRow();
+            MainFrame.currentIdxAd = index;
             if (index != -1) {
                 setOfferToCandidate(index);
                 mainFrame.hideJobsPanel();
@@ -143,13 +144,15 @@ public class JobsPanel extends JPanel {
     private void setOfferToCandidate(int selectedIdx) {
         ArrayList<JobAdvertisement> temp = mainFrame.dataManager.getJobAds();
         mainFrame.candidateDataManager.adKeyToConnect = temp.get(selectedIdx);
+
     }
 
     public void filterCandidateTable(int index) {
         TableModel model = this.allAdsTable.getModel();
         String firm = (String) model.getValueAt(index, 0);
         String position = (String) model.getValueAt(index,1);
-        mainFrame.candidateDataManager.loadCandidatesFromDatabase(firm,position);
+        mainFrame.candidateDataManager.loadCandidatesFromDatabase();
+        mainFrame.candidateDataManager.filterCandidatesByFirm(firm, position);
     }
 
 }
